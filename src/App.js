@@ -1,23 +1,23 @@
-import React, { useEffect } from 'react';
-import './styles.css';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
 /// https://daveceddia.com/tailwind-create-react-app
 import './tailwind.output.css';
+import './styles.css';
+
 import Header from './components/header';
-import { db } from './firebase/config';
+import ElementDetails from './components/ElementDetails';
+import ElementList from './components/ElementList';
 
 
 const App = () => {
-    useEffect(() => {
-        db.collection('items').get().then((querySnapshot) => {
-            querySnapshot.forEach(function(doc) {
-                console.log(doc.id, " => ", doc.data());
-            });
-        });
-    }, []);
-
     return (
         <div>
             <Header />
+            <Switch>
+                <Route path="/" exact component={ElementList} />
+                <Route path="/element/:id" exact component={ElementDetails} />
+            </Switch>
         </div>
     )
 }
