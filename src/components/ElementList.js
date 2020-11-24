@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { db } from '../firebase/config';
+import ElementDetails from './ElementDetails'; 
 
 const ElementList = () => {
     useEffect(() => {
@@ -10,7 +11,22 @@ const ElementList = () => {
         });
     }, []);
     
-    return <div>List</div>
+    return (
+        <div className="max-w-screen-lg mx-auto">
+            <div className="grid grid-cols-4 gap-4 py-8">
+                <ElementDetails />
+                <ElementDetails />
+                <ElementDetails />
+                <ElementDetails />
+                <ElementDetails />
+                <ElementDetails />
+                <ElementDetails />
+                <ElementDetails />
+                <ElementDetails />
+                <ElementDetails />
+            </div>
+        </div>
+    )
 }
 
 export default ElementList;
