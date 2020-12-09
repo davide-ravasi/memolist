@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
-import { db } from "../firebase";
 import ElementDetails from "./ElementDetails";
+import { connect } from 'react-redux';
+import { fetchList } from '../actions/';
+import { PreviousMap } from "postcss";
 
-const ElementList = () => {
+
+const ElementList = (props) => {
   useEffect(() => {
-    db.collection("items")
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach(function (doc) {
-          console.log(doc.id, " => ", doc.data());
-        });
-      });
+    props.fetchList();
   }, []);
 
   return (
@@ -31,4 +28,4 @@ const ElementList = () => {
   );
 };
 
-export default ElementList;
+export default connect(null, { fetchList })(ElementList);

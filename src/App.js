@@ -26,9 +26,11 @@ const App = () => {
   useEffect(() => {
     auth.onAuthStateChanged(function (user) {
       if (user) {
+        console.log(user);
         // User is signed in.
         setUserState(user);
       } else {
+        console.log(user);
         // User is signed out
         setUserState(null);
       }
