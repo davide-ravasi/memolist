@@ -1,22 +1,10 @@
 import { FETCH_LIST } from "./types";
 import { db } from "../firebase";
 
-export const fetchList = () => async (dispatch) => {
-  // db.collection("notes")
-  //   .get()
-  //   .then((querySnapshot) => {
-  //     querySnapshot.forEach(function (doc) {
-  //       console.log(doc.data());
-  //     });
-  //   });
-
+export const fetchList = () => async function(dispatch) {
   const list = await db.collection('notes').get();
-  const arrayList = [];
-  list.forEach(doc => {
-    arrayList.push(doc.data());
-  })
-
-  console.log(arrayList);
+  // add doc id to every element in collection
+  const arrayList = list.docs.map(doc => { return {...doc.data(), id: doc.id}});
 
   dispatch({ type: FETCH_LIST, payload: arrayList });
 }
