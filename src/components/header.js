@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { faThList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -10,12 +11,12 @@ const Header = ({ user, signIn, signOut }) => {
     <div className="containe bg-gray-800 shadow-md">
       <div className="mx-auto max-w-screen-lg flex h-16 flex items-center justify-between h-16">
         <div>
-          <a className="logo px-2 text-white text-xl mt-6 text-indigo-300">
+          <Link to="/" className="logo px-2 text-white text-xl mt-6 text-indigo-300">
             <FontAwesomeIcon icon={faThList} />
-          </a>
-          <a href="#" className={menuItemsCss}>
+          </Link>
+          <Link to="/" className={menuItemsCss}>
             Home
-          </a>
+          </Link>
           <a href="#" className={menuItemsCss}>
             All Lists
           </a>
