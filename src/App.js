@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { fetchList } from './actions/';
 
 /// https://daveceddia.com/tailwind-create-react-app
 import "./tailwind.output.css";
@@ -9,6 +11,8 @@ import { auth, signInGoogle } from "./firebase";
 import Header from "./components/header";
 import ElementDetails from "./components/ElementDetails";
 import ElementList from "./components/ElementList";
+import ElementAdd from "./components/ElementAdd";
+import ElementEdit from "./components/ElementEdit";
 
 const signIn = (e) => {
   e.preventDefault();
@@ -22,6 +26,7 @@ const signOut = (e) => {
 
 const App = () => {
   const [userState, setUserState] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     auth.onAuthStateChanged(function (user) {
@@ -37,11 +42,17 @@ const App = () => {
     });
   }, []);
 
+  useEffect(() => {
+    dispatch(fetchList());
+  },[]);
+
   return (
     <div>
       <Header signIn={signIn} signOut={signOut} user={userState} />
       <Switch>
-        <Route path="/" exact component={ElementList} />
+        <Route path="/" exact component={ElementList} />       
+        <Route path="/element/add" exact component={ElementAdd} />
+        <Route path="/element/edit/:id" exact component={ElementEdit} />
         <Route path="/element/:id" exact component={ElementDetails} />
       </Switch>
     </div>

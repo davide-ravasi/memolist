@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { text } from '@fortawesome/fontawesome-svg-core';
 
@@ -14,6 +14,9 @@ const ElementDetails = (props) => {
             <div className="text-gray-400 text-sm">{text}</div>
             <Link to={link} className="flex justify-center items-center text-white text-sm absolute top-3 right-2 rounded-full h-6 w-6 bg-gray-400 hover:bg-gray-700 transition duration-500 ease-in-out">
                 <FontAwesomeIcon icon={faLink} />
+            </Link>
+            <Link to={`/element/edit/${id}`} className="flex justify-center items-center text-white text-sm absolute bottom-3 right-2 rounded-full h-6 w-6 bg-gray-400 hover:bg-gray-700 transition duration-500 ease-in-out">
+                <FontAwesomeIcon icon={faPen} />
             </Link>
         </div>
     )
