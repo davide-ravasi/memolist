@@ -1,2 +1,4 @@
 export const FETCH_LIST = 'FETCH_LIST';
 export const ADD_ELEMENT = 'ADD_ELEMENT';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';

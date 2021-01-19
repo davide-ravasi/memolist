@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCategories } from '../actions/index';
 
 const resetValues = {
     name: '',
@@ -14,6 +15,9 @@ const resetValues = {
 
 const ElementForm = ({ defaultValues, action }) => {
     const dispatch = useDispatch();
+    const selectCats = state => state.categories;
+    const {listCategories} = useSelector(selectCats);
+
     const labelStyles = 'block text-md text-gray-7000 pt-2 pb-1';
     const inputStyles = 'w-full shadow-md p-1.5 text-sm border border-solid border-gray-300 rounded-lg';
     const error = 'block text-sm text-red-600 pt-1';
@@ -76,11 +80,13 @@ const ElementForm = ({ defaultValues, action }) => {
                     <div className={error}>{errors.link}</div>
                 ) : null}
                 <label htmlFor="category" className={labelStyles}>Category</label>
-                <Field as="select" name="category" id="category" className={inputStyles}>
-                    <option value="react">React</option>
-                    <option value="typescript">Typescript</option>
-                    <option value="css">Css</option>
-            </Field>
+                {listCategories && listCategories.length ?
+                    <Field as="select" name="category" id="category" className={inputStyles}>
+                        {listCategories.map(cat => <option value={cat}>{cat}</option>)}
+                    </Field>
+                : 
+                    <span>....loading categories</span>
+                }        
             <div className="mt-4 flex justify-center content-center">
                 <button type="submit" className="p-1.5 rounded-lg bg-blue-600 text-white">Submit</button>
             </div>
