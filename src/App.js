@@ -49,9 +49,9 @@ const App = () => {
     });
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchList());
-  },[]);
+  // useEffect(() => {
+  //   dispatch(fetchList());
+  // },[]);
 
   return (
     <div>
