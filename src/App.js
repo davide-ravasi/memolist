@@ -7,16 +7,17 @@ import { fetchList } from './actions/';
 import "./tailwind.output.css";
 import "./styles.css";
 
-import { auth, signInGoogle } from "./firebase";
+import { auth, signInGoogle, addUserData } from "./firebase";
 import Header from "./components/header";
 import ElementDetails from "./components/ElementDetails";
 import ElementList from "./components/ElementList";
 import ElementAdd from "./components/ElementAdd";
 import ElementEdit from "./components/ElementEdit";
+import { setCurrentUser } from './actions';
 
 const signIn = (e) => {
   e.preventDefault();
-  signInGoogle();
+  signInGoogle()
 };
 
 const signOut = (e) => {
@@ -29,13 +30,19 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    auth.onAuthStateChanged(function (user) {
+    // @TODO : you have to add the unsuscribe method for this listener
+    auth.onAuthStateChanged( async user => {
       if (user) {
-        console.log(user);
+        console.log('user ', user);
         // User is signed in.
         setUserState(user);
+        const userRef = await addUserData(user);
+        
+        userRef.onSnapshot(querySnapshot => {
+          dispatch(setCurrentUser(querySnapshot));
+        });
+          
       } else {
-        console.log(user);
         // User is signed out
         setUserState(null);
       }
