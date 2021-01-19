@@ -29,7 +29,7 @@ const Header = ({ user, signIn, signOut }) => {
           <div>
             <span className={menuItemsCss}>You're not connected</span>
             <a href="#" className={menuItemsCss} onClick={signIn}>
-              Login
+              Login with Google
             </a>
           </div>
         )}
