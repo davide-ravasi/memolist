@@ -1,4 +1,4 @@
-import { FETCH_LIST, ADD_ELEMENT } from "./types";
+import { FETCH_LIST, ADD_ELEMENT, FETCH_CATEGORIES } from "./types";
 import { db } from "../firebase";
 
 export const fetchList = () => async function(dispatch) {
@@ -21,4 +21,15 @@ export const editElement = (el) => async dispatch => {
   console.log("edited element");
   console.log(addEl);
    //dispatch({ type: ADD_ELEMENT, payload: el});
+}
+
+export const setCurrentUser = (user) => async dispatch => {
+  console.log('action : ',user);
+}
+
+export const fetchCategories = () => async dispatch => {
+  const listCategories = await db.collection('categories').get();
+  const arrCat = await listCategories.docs.map(cat => cat.data().name);
+
+  dispatch({type: FETCH_CATEGORIES, payload: arrCat});
 }
