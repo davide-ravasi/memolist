@@ -23,6 +23,11 @@ const ElementForm = ({ defaultValues, action }) => {
     const error = 'block text-sm text-red-600 pt-1';
     let initialValues = defaultValues ? defaultValues : resetValues;
     const requiredMsg = 'This field is required';
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, []);
+
     // Synchronous validation
     const validate = (values, props) => {
         const errors = {};
