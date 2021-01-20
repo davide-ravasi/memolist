@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { fetchList } from './actions/';
+//import { fetchList } from './actions/';
 
 /// https://daveceddia.com/tailwind-create-react-app
 import "./tailwind.output.css";
 import "./styles.css";
+
+import {fetchCategories} from './actions/index';
 
 import { auth, signInGoogle, addUserData } from "./firebase";
 import Header from "./components/header";
@@ -48,6 +50,10 @@ const App = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+      dispatch(fetchCategories());
+  },[dispatch]);
 
   // useEffect(() => {
   //   dispatch(fetchList());
