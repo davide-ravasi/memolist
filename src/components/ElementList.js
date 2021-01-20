@@ -14,7 +14,7 @@ const ElementList = (props) => {
   const selectEls = state => state.list;
   const elements = useSelector(selectEls);
   const selectCats = state => state.categories;
-  const {activeCategory} = useSelector(selectCats);
+  const {listCategories, activeCategory} = useSelector(selectCats);
   const dispatch = useDispatch();
   const stylesBtnAdd = `flex justify-center items-center text-white 
                         text-sm absolute right-2 rounded-full h-8 w-8 
@@ -36,7 +36,7 @@ const ElementList = (props) => {
       </div>
       <div className="grid grid-cols-4 gap-4 py-8">
         { elements.length ?
-          filteredEls.map(el => <ElementDetails {...el} />)
+          filteredEls.map(el => <ElementDetails {...el} categories={listCategories}  />)
           :
           <div>Loading...</div>
         }
