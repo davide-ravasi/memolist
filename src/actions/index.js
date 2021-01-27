@@ -10,7 +10,7 @@ export const fetchList = () => async function(dispatch) {
 }
 
 export const addElement = (el) => async dispatch => {
-  const addEl = await db.collection('notes').add(el);
+  const addEl = await db.collection('notes').add({...el, created_at: new Date()});
   console.log("added element");
   console.log(addEl);
    //dispatch({ type: ADD_ELEMENT, payload: el});

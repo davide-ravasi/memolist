@@ -24,10 +24,12 @@ const ElementForm = ({ defaultValues, action }) => {
     let initialValues = defaultValues ? defaultValues : resetValues;
     const requiredMsg = 'This field is required';
 
+
     useEffect(() => {
         dispatch(fetchCategories());
     }, []);
 
+    console.log(listCategories);
     // Synchronous validation
     const validate = (values, props) => {
         const errors = {};
@@ -85,13 +87,14 @@ const ElementForm = ({ defaultValues, action }) => {
                     <div className={error}>{errors.link}</div>
                 ) : null}
                 <label htmlFor="category" className={labelStyles}>Category</label>
-                {listCategories && listCategories.length ?
+                {(listCategories && listCategories.length) ?
                     <Field as="select" name="category" id="category" className={inputStyles}>
-                        {listCategories.map(cat => <option value={cat}>{cat}</option>)}
+                        {listCategories.map(cat => <option value={cat.name}>{cat.name}</option>)}
                     </Field>
+                    
                 : 
                     <span>....loading categories</span>
-                }        
+                }       
             <div className="mt-4 flex justify-center content-center">
                 <button type="submit" className="p-1.5 rounded-lg bg-blue-600 text-white">Submit</button>
             </div>
@@ -101,3 +104,13 @@ const ElementForm = ({ defaultValues, action }) => {
 }
 
 export default ElementForm;
+
+/*
+                {listCategories && listCategories.length ?
+                    <Field as="select" name="category" id="category" className={inputStyles}>
+                        {listCategories.map(cat => <option value={cat}>{cat}</option>)}
+                    </Field>
+                : 
+                    <span>....loading categories</span>
+                } 
+*/
