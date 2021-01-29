@@ -28,25 +28,19 @@ const signOut = (e) => {
 };
 
 const App = () => {
-  const [userState, setUserState] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     // @TODO : you have to add the unsuscribe method for this listener
     auth.onAuthStateChanged( async user => {
       if (user) {
-        console.log('user ', user);
         // User is signed in.
-        setUserState(user);
         const userRef = await addUserData(user);
-        
-        userRef.onSnapshot(querySnapshot => {
-          dispatch(setCurrentUser(querySnapshot));
-        });
+        await dispatch(setCurrentUser(user));
           
       } else {
         // User is signed out
-        setUserState(null);
+        await dispatch(setCurrentUser(null));
       }
     });
   }, []);
@@ -61,7 +55,7 @@ const App = () => {
 
   return (
     <div>
-      <Header signIn={signIn} signOut={signOut} user={userState} />
+      <Header signIn={signIn} signOut={signOut} />
       <Switch>
         <Route path="/" exact component={ElementList} />       
         <Route path="/element/add" exact component={ElementAdd} />

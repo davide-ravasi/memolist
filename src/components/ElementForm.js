@@ -13,7 +13,7 @@ const resetValues = {
     userId: ''
 }
 
-const ElementForm = ({ defaultValues, action }) => {
+const ElementForm = ({ defaultValues, action, userName }) => {
     const dispatch = useDispatch();
     const selectCats = state => state.categories;
     const {listCategories} = useSelector(selectCats);
@@ -29,7 +29,6 @@ const ElementForm = ({ defaultValues, action }) => {
         dispatch(fetchCategories());
     }, []);
 
-    console.log(listCategories);
     // Synchronous validation
     const validate = (values, props) => {
         const errors = {};
@@ -60,7 +59,7 @@ const ElementForm = ({ defaultValues, action }) => {
     return <Formik  
         initialValues={initialValues}     
         onSubmit={(values) => {
-            dispatch(action(values));
+            dispatch(action(values, userName));
         }}
         validate={validate}
       >
