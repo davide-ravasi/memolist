@@ -5,8 +5,9 @@ const initState = {
 }
 
 export default (state = initState, action) => {
-    switch(action.payload) {
+    switch(action.type) {
         case SET_CURRENT_USER:
+            console.log('set current user');
             return {
                 ...state,
                 currentUser: action.payload

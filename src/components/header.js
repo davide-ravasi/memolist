@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { faThList, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Header = ({ user, signIn, signOut }) => {
+const Header = ({ signIn, signOut }) => {
+  const {currentUser} = useSelector(state => state.user);
   const menuItemsCss =
     "px-6 py-1 text-white font-medium text-base hover:bg-gray-600 rounded-md";
 
@@ -25,7 +27,7 @@ const Header = ({ user, signIn, signOut }) => {
           </a>
         </div>
 
-        {!user && (
+        {!currentUser && (
           <div>
             <span className={menuItemsCss}>You're not connected</span>
             <a href="#" className={menuItemsCss} onClick={signIn}>
@@ -33,11 +35,11 @@ const Header = ({ user, signIn, signOut }) => {
             </a>
           </div>
         )}
-        {user && (
+        {currentUser && (
           <div>
             <span className="px-6 py-1 text-white font-medium text-base text-indigo-300">
               <FontAwesomeIcon className="mr-2" icon={faUser} />
-              {user.displayName}
+              {currentUser.name}
             </span>
             <a href="#" className={menuItemsCss} onClick={signOut}>
               Logout
