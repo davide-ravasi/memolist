@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import { text } from '@fortawesome/fontawesome-svg-core';
 
 const ElementDetails = (props) => {
-    console.log(props);
     const {id, category, link, text, name, categories, created_at, userName} = props;
     const createdAtConverted = convertDateFromTimestamp(created_at);
 
