@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ElementForm from './ElementForm';
-import { addElement } from '../actions/';
+import { addElement } from '../redux/list/list.actions';
 
 const ElementAdd = () => {
     const {currentUser} = useSelector(state => state.user);

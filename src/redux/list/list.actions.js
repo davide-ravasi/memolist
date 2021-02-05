@@ -1,5 +1,5 @@
-import { FETCH_LIST, ADD_ELEMENT, FETCH_CATEGORIES, SET_ACTIVE_CATEGORY, SET_CURRENT_USER } from "./types";
-import { db } from "../firebase";
+import { FETCH_LIST } from "./list.types";
+import { db } from "../../firebase";
 
 export const fetchList = () => async function(dispatch) {
   const list = await db.collection('notes').get();
@@ -25,28 +25,4 @@ export const removeElement = (id) => async dispatch => {
   const removeEl = await db.collection('notes').doc(id).delete();
 
   console.log('element removed', removeEl);
-}
-
-export const setCurrentUser = (user) => {
-  user ? 
-    user = {
-      name: user.displayName,
-      email: user.email,
-      photo: user.photoURL
-    } : 
-    user = null
-
-  return {type: SET_CURRENT_USER, payload: user}
-}
-
-
-export const fetchCategories = () => async dispatch => {
-  const listCategories = await db.collection('categories').get();
-  const arrCat = await listCategories.docs.map(cat => cat.data());
-
-  dispatch({type: FETCH_CATEGORIES, payload: arrCat});
-}
-
-export const setActiveCategory = (cat) => {
-  return {type: SET_ACTIVE_CATEGORY, payload: cat}
 }

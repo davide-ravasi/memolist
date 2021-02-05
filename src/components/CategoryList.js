@@ -5,7 +5,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {useDispatch} from 'react-redux';
-import {setActiveCategory} from '../actions/index';
+import {setActiveCategory} from '../redux/categories/categories.actions';
 
 import CategoryBox from './CategoryBox';
 import ButtonIcon from '../components/ButtonIcon';

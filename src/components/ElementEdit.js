@@ -2,10 +2,10 @@ import React from 'react';
 import ElementForm from './ElementForm';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { editElement } from '../actions/';
+import { editElement } from '../redux/list/list.actions';
 
 const ElementEdit = () => {
-    const list = useSelector(state => state.list);
+    const {listItems: list} = useSelector(state => state.list);
     let { id } = useParams();
     const note = list.find(el => el.id === id);
     const defaultValues = {...note} 
