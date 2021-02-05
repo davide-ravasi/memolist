@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchList, removeElement } from '../actions/';
+import { removeElement } from '../redux/list/list.actions';
+import { fetchList } from '../redux/list/list.actions';
 
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
