@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCategories } from '../actions/index';
+import { fetchCategories } from '../redux/categories/categories.actions';
 
 const resetValues = {
     name: '',

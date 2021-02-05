@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-//import { fetchList } from './actions/';
 
 /// https://daveceddia.com/tailwind-create-react-app
 import "./tailwind.output.css";
 import "./styles.css";
 
-import {fetchCategories} from './actions/index';
+import {fetchCategories} from './redux/categories/categories.actions';
 
 import { auth, signInGoogle, addUserData } from "./firebase";
 import Header from "./components/header";
@@ -15,7 +14,7 @@ import ElementDetails from "./components/ElementDetails";
 import ElementList from "./components/ElementList";
 import ElementAdd from "./components/ElementAdd";
 import ElementEdit from "./components/ElementEdit";
-import { setCurrentUser } from './actions';
+import { setCurrentUser } from './redux/user/user.actions';
 
 const signIn = (e) => {
   e.preventDefault();

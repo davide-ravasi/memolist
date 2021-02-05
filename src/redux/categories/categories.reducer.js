@@ -1,4 +1,4 @@
-import { FETCH_CATEGORIES, SET_ACTIVE_CATEGORY } from "../actions/types";
+import { FETCH_CATEGORIES, SET_ACTIVE_CATEGORY } from "./categories.types";
 
 const initial_state = {
     listCategories: [],
