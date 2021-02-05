@@ -21,6 +21,12 @@ export const editElement = (el) => async dispatch => {
    //dispatch({ type: ADD_ELEMENT, payload: el});
 }
 
+export const removeElement = (id) => async dispatch => {
+  const removeEl = await db.collection('notes').doc(id).delete();
+
+  console.log('element removed', removeEl);
+}
+
 export const setCurrentUser = (user) => {
   user ? 
     user = {
