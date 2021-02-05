@@ -1,11 +1,21 @@
 import { ADD_ELEMENT, FETCH_LIST } from "../actions/types";
 
-export default (state = [], action) => {
+const initialState = {
+  listItems: []
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_LIST:
-      return [...action.payload]
+      return {
+        ...state,
+        listItems: action.payload
+      }
     case ADD_ELEMENT:
-      return [...state, action.payload]
+      return {
+        ...state,
+        listItems: action.payload
+      }
     default:
       return state
   }
