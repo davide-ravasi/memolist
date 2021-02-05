@@ -1,4 +1,4 @@
-import { ADD_ELEMENT, FETCH_LIST } from "../actions/types";
+import { ADD_ELEMENT, FETCH_LIST } from "./list.types";
 
 const initialState = {
   listItems: []

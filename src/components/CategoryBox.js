@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import {setActiveCategory} from '../actions/index';
+import {setActiveCategory} from '../redux/categories/categories.actions';
 
 const CategoryBox = ({name, activeCategory}) => {
     const isActive = name === activeCategory
