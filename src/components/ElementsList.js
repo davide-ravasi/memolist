@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import ElementDetails from "./ElementDetails";
-import Spinner from './Spinner';
 
 const ElementsList = ({onRemove, listItems}) => {
-    const dispatch = useDispatch();
-
     const selectCats = state => state.categories;
     const {listCategories, activeCategory} = useSelector(selectCats);
 
