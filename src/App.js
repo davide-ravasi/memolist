@@ -9,9 +9,9 @@ import "./styles.css";
 import {fetchCategories} from './redux/categories/categories.actions';
 
 import { auth, signInGoogle, addUserData } from "./firebase";
-import Header from "./components/header";
+import Header from "./components/Header";
 import ElementDetails from "./components/ElementDetails";
-import ElementList from "./components/ElementList";
+import HomePage from "./pages/HomePage";
 import ElementAdd from "./components/ElementAdd";
 import ElementEdit from "./components/ElementEdit";
 import { setCurrentUser } from './redux/user/user.actions';
@@ -56,7 +56,7 @@ const App = () => {
     <div>
       <Header signIn={signIn} signOut={signOut} />
       <Switch>
-        <Route path="/" exact component={ElementList} />       
+        <Route path="/" exact component={HomePage} />       
         <Route path="/element/add" exact component={ElementAdd} />
         <Route path="/element/edit/:id" exact component={ElementEdit} />
         <Route path="/element/:id" exact component={ElementDetails} />
