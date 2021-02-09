@@ -3,7 +3,8 @@ import Spinner from './Spinner';
 
 const WithSpinner = WrappedComponent => ({isLoading, bgColor, text, ...props}) => {
         {return isLoading ? 
-            <Spinner bgColor={bgColor} text={text} />  : <WrappedComponent {...props} />
+            <Spinner bgColor={bgColor} text={text} />  : <WrappedComponent {...props} /> : 
+            <Wrappedcomponent />
         }    
 }
 

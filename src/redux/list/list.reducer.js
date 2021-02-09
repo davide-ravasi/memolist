@@ -1,10 +1,12 @@
-import { ADD_ELEMENT, FETCH_LIST } from "./list.types";
+import { ADD_ELEMENT, FETCH_LIST, EDIT_ELEMENT } from "./list.types";
+
+import addElementToArray from '../../outils/addElementToArray';
 
 const initialState = {
   listItems: []
 }
 
-export default (state = initialState, action) => {
+const listReducer =  (state = initialState, action) => {
   switch (action.type) {
     case FETCH_LIST:
       return {
@@ -16,7 +18,14 @@ export default (state = initialState, action) => {
         ...state,
         listItems: action.payload
       }
+    case EDIT_ELEMENT:
+      return {
+        ...state,
+        listItems: addElementToArray(state.listItems, action.payload)
+      }  
     default:
       return state
   }
 }
+
+export default listReducer;

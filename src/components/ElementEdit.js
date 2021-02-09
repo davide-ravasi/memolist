@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import { editElement } from '../redux/list/list.actions';
 
 const ElementEdit = () => {
-    const {listItems: list} = useSelector(state => state.list);
+    const {listItems} = useSelector(state => state.list);
     let { id } = useParams();
-    const note = list.find(el => el.id === id);
+    const note = listItems.find(el => el.id === id);
     const defaultValues = {...note} 
 
     return <div className="max-w-screen-lg mx-auto pt-5"> 
