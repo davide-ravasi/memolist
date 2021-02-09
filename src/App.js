@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 
@@ -34,7 +34,7 @@ const App = () => {
     auth.onAuthStateChanged( async user => {
       if (user) {
         // User is signed in.
-        const userRef = await addUserData(user);
+        await addUserData(user);
         await dispatch(setCurrentUser(user));
           
       } else {
@@ -42,15 +42,11 @@ const App = () => {
         await dispatch(setCurrentUser(null));
       }
     });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
       dispatch(fetchCategories());
   },[dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(fetchList());
-  // },[]);
 
   return (
     <div>

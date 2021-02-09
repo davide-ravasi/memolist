@@ -4,10 +4,9 @@ const initState = {
     currentUser: null
 }
 
-export default (state = initState, action) => {
+const userReducer = (state = initState, action) => {
     switch(action.type) {
         case SET_CURRENT_USER:
-            console.log('set current user');
             return {
                 ...state,
                 currentUser: action.payload
@@ -16,3 +15,5 @@ export default (state = initState, action) => {
             return state;    
     }
 }
+
+export default userReducer;
