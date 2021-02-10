@@ -10,7 +10,7 @@ import Spinner from './Spinner';
 
 const ElementsWrapper = () => {
     const [modalShow, setModalShow] = useState(false);
-    const [idElToRemove, setIdElToRemove] = useState('');
+    const [elToRemove, setElToRemove] = useState();
 
     const selectEls = state => state.list;
     const {listItems} = useSelector(selectEls);
@@ -19,17 +19,17 @@ const ElementsWrapper = () => {
 
     const onCloseModal = () => {
         setModalShow(false);
-        setIdElToRemove('');
+        setElToRemove();
     }
     
     const onConfirmModal = () => {
         setModalShow(false);
-        dispatch(removeElement(idElToRemove));
+        dispatch(removeElement(elToRemove));
     }
 
-    const onRemove = (id) => {
+    const onRemove = (item) => {
         setModalShow(true);
-        setIdElToRemove(id);
+        setElToRemove(item);
     }
 
     return (

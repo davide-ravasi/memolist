@@ -6,8 +6,8 @@ import { convertDateFromTimestamp } from '../outils/dateConverter';
 import { faLink, faPen, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ElementDetails = (props) => {
-    const {id, category, link, text, name, categories, created_at, userName, onRemove} = props;
+const ElementDetails = ({itemDet, categories, onRemove}) => {
+    const {id, category, link, text, name, created_at, userName} = itemDet;
     const createdAtConverted = convertDateFromTimestamp(created_at);
 
     const cat = categories.find(cat => {
@@ -28,7 +28,7 @@ const ElementDetails = (props) => {
             <Link to={`/element/edit/${id}`} className={`${roundbtnStyles} bottom-3 right-9 bg-gray-400 hover:bg-green-700`}>
                 <FontAwesomeIcon icon={faPen} />
             </Link>
-            <div className={`${roundbtnStyles} bottom-3 right-2 bg-red-400 hover:bg-red-700 cursor-pointer`} onClick={() => onRemove(id)}>
+            <div className={`${roundbtnStyles} bottom-3 right-2 bg-red-400 hover:bg-red-700 cursor-pointer`} onClick={() => onRemove(itemDet)}>
                 <FontAwesomeIcon icon={faTimes} />
             </div>
         </div>
