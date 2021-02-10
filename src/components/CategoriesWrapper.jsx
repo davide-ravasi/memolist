@@ -18,7 +18,7 @@ const CategoriesWrapper = () => {
     const removeFilter = () => {
         dispatch(setActiveCategory(''));
     }
-    
+      
     return(
         <>
             {
