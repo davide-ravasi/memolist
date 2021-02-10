@@ -22,9 +22,10 @@ const ElementDetails = ({itemDet, categories, onRemove}) => {
             <span className="text-gray-600 bg-gray-100 uppercase shadow-xl px-1 text-xs rounded" style={cat ? {backgroundColor: cat.color} : {}}>{category}</span>
             <div className="text-gray-500 text-sm">{text}</div>
             <div className="text-gray-400 text-xs pt-2">Created: {createdAtConverted}<br /> {userName && `by ${userName}`}</div>
-            <Link to={link} className={`${roundbtnStyles} top-3 right-2 bg-gray-400 hover:bg-gray-700`}>
+
+            { link && <Link to={link} className={`${roundbtnStyles} top-3 right-2 bg-gray-400 hover:bg-gray-700`}>
                 <FontAwesomeIcon icon={faLink} />
-            </Link>
+            </Link>}
             <Link to={`/element/edit/${id}`} className={`${roundbtnStyles} bottom-3 right-9 bg-gray-400 hover:bg-green-700`}>
                 <FontAwesomeIcon icon={faPen} />
             </Link>
