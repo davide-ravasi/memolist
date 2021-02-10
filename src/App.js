@@ -1,20 +1,23 @@
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { Route, Switch, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { auth, signInGoogle, addUserData } from "./firebase";
 
 /// https://daveceddia.com/tailwind-create-react-app
 import "./tailwind.output.css";
 import "./styles.css";
 
 import {fetchCategories} from './redux/categories/categories.actions';
+import { setCurrentUser } from './redux/user/user.actions';
+import { cleanFeedbackMsg } from './redux/list/list.actions';
 
-import { auth, signInGoogle, addUserData } from "./firebase";
 import Header from "./components/Header";
 import ElementDetails from "./components/ElementDetails";
 import HomePage from "./pages/HomePage";
 import ElementAdd from "./components/ElementAdd";
 import ElementEdit from "./components/ElementEdit";
-import { setCurrentUser } from './redux/user/user.actions';
+import Modal from './components/ModalPortal';
+import FeedbackModal from './components/FeedbackModal';
 
 const signIn = (e) => {
   e.preventDefault();
@@ -26,8 +29,12 @@ const signOut = (e) => {
   auth.signOut();
 };
 
-const App = () => {
-  const dispatch = useDispatch();
+const App = (props) => {
+  console.log(props);
+  const selectList = state => state.list;
+  const {feedbackMsg} = useSelector(selectList);
+  const dispatch = useDispatch(); 
+  const history = useHistory();
 
   useEffect(() => {
     // @TODO : you have to add the unsuscribe method for this listener
@@ -42,11 +49,19 @@ const App = () => {
         await dispatch(setCurrentUser(null));
       }
     });
+
+    dispatch(fetchCategories());
+
   }, [dispatch]);
 
   useEffect(() => {
-      dispatch(fetchCategories());
-  },[dispatch]);
+      if(feedbackMsg) {
+        setTimeout(() => {
+          dispatch(cleanFeedbackMsg())
+          history.push('/')
+        },4000);
+      }
+  },[feedbackMsg, dispatch, history]);
 
   return (
     <div>
@@ -57,6 +72,9 @@ const App = () => {
         <Route path="/element/edit/:id" exact component={ElementEdit} />
         <Route path="/element/:id" exact component={ElementDetails} />
       </Switch>
+      <Modal>
+            <FeedbackModal feedbackMsg={feedbackMsg} />
+      </Modal>
     </div>
   );
 };
