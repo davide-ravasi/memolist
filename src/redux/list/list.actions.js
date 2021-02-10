@@ -1,4 +1,4 @@
-import { FETCH_LIST, ADD_ELEMENT, EDIT_ELEMENT } from "./list.types";
+import { FETCH_LIST, ADD_ELEMENT, EDIT_ELEMENT, REMOVE_ELEMENT, CLEAN_FEEDBACK_MSG } from "./list.types";
 import { db } from "../../firebase";
 
 export const fetchList = () => async function(dispatch) {
@@ -18,6 +18,11 @@ export const editElement = (el) => async dispatch => {
   dispatch({ type: EDIT_ELEMENT, payload: el});
 }
 
-export const removeElement = (id) => async dispatch => {
-  const removeEl = await db.collection('notes').doc(id).delete();
+export const removeElement = (el) => async dispatch => {
+  const removeEl = await db.collection('notes').doc(el.id).delete();
+  dispatch({ type: REMOVE_ELEMENT, payload: el});
 }
+
+export const cleanFeedbackMsg = () => (
+  {type: CLEAN_FEEDBACK_MSG}
+)
