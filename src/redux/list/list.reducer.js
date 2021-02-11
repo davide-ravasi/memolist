@@ -34,7 +34,6 @@ const listReducer =  (state = initialState, action) => {
         feedbackMsg: `The element with title [${action.payload.name}] has been removed`
       }  
     case CLEAN_FEEDBACK_MSG:
-      console.log('fb cleaned');
       return {
         ...state,
         feedbackMsg: ''
