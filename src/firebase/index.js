@@ -23,9 +23,24 @@ export const addUserData = async (user) => {
         uid,
         name,
         email,
-        createdAt: new Date()
+        createdAt: new Date(),
+        role: 'reader'
       });
     }
 
     return userRef;
 };
+
+export const checkIsAdmin = async (currentUser) => {
+  if(!currentUser) return false;
+
+  const userRef = await db.collection('users').doc(currentUser.uid);
+  const userDoc = await userRef.get();
+
+  if(userDoc.exists && userDoc.data().role === 'admin') {
+    return true;
+  }
+
+  return false;
+
+}
