@@ -22,7 +22,7 @@ const ElementsList = ({onRemove, listItems}) => {
 
 
     useEffect(() => {
-        currentUser ? setIsAdmin(true) : setIsAdmin(false)
+        (currentUser && currentUser.admLvl === true) ? setIsAdmin(true) : setIsAdmin(false)
       }, [currentUser]);
 
     return (

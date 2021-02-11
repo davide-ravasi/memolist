@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { auth, signInGoogle, addUserData } from "./firebase";
+import { auth, signInGoogle, manageUserData } from "./firebase";
 
 /// https://daveceddia.com/tailwind-create-react-app
 import "./tailwind.output.css";
@@ -16,6 +16,7 @@ import ElementDetails from "./components/ElementDetails";
 import HomePage from "./pages/HomePage";
 import ElementAdd from "./components/ElementAdd";
 import ElementEdit from "./components/ElementEdit";
+import Login from './components/Login';
 import Modal from './components/ModalPortal';
 import FeedbackModal from './components/FeedbackModal';
 
@@ -41,8 +42,8 @@ const App = (props) => {
     auth.onAuthStateChanged( async user => {
       if (user) {
         // User is signed in.
-        await addUserData(user);
-        await dispatch(setCurrentUser(user));
+        const current = await manageUserData(user);
+        await dispatch(setCurrentUser(current));
           
       } else {
         // User is signed out
@@ -71,6 +72,7 @@ const App = (props) => {
         <Route path="/element/add" exact component={ElementAdd} />
         <Route path="/element/edit/:id" exact component={ElementEdit} />
         <Route path="/element/:id" exact component={ElementDetails} />
+        <Route path="/connection" exact component={Login} />
       </Switch>
       <Modal>
             <FeedbackModal feedbackMsg={feedbackMsg} />
