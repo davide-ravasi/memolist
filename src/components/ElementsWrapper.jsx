@@ -38,6 +38,7 @@ const ElementsWrapper = () => {
             <ElementsList onRemove={onRemove} listItems={listItems} /> :
             <Spinner bgColor={'text-black'} text={'loading elements list'} />
         }
+
         <Modal>
             <ConfirmModal modalShow={modalShow} closeModal={onCloseModal} confirmModal={onConfirmModal} />
         </Modal>
