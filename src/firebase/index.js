@@ -10,25 +10,40 @@ export const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 export const signInGoogle = () => firebase.auth().signInWithPopup(provider);
 
-export const addUserData = async (user) => {
-    console.log('user from google', user);
+export const signInWithEmailAndPassword = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password)
+
+export const manageUserData = async (user) => {
+
     if(!user) return false;
 
     const userRef = await db.collection('users').doc(user.uid);
     const userDoc = await userRef.get();
 
     if(!userDoc.exists) {
-      const { uid, email, displayName: name } = user;
+      const { uid, email, displayName: name, photoURL } = user;
       userRef.set({
         uid,
         name,
         email,
+        photoURL,
         createdAt: new Date(),
         role: 'reader'
       });
     }
 
-    return userRef;
+    if(userDoc.exists) {
+      const { uid, email, name, role, createdAt, photoURL } = userDoc.data();
+      userRef.set({
+        uid,
+        name,
+        email,
+        createdAt,
+        photoURL,
+        role
+      });
+    }
+
+    return userDoc.data();
 };
 
 export const checkIsAdmin = async (currentUser) => {
