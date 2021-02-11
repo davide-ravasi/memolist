@@ -7,7 +7,7 @@ export const setCurrentUser = user => async dispatch => {
   user ? 
     user = {
       uid: user.uid,
-      name: user.displayName,
+      name: user.name,
       email: user.email,
       photo: user.photoURL,
       admLvl: isAdmin  
