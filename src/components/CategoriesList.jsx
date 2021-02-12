@@ -6,7 +6,7 @@ const CategoriesList = ({activeCategory, listCategories}) => {
     return(
         <div className="flex">
             {listCategories.map(cat => (
-                <CategoryBox name={cat.name} activeCategory={activeCategory} />))
+                <CategoryBox key={cat.name} name={cat.name} activeCategory={activeCategory} />))
             }         
         </div>
     )
