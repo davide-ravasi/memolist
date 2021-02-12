@@ -1,5 +1,7 @@
 import firebase from "firebase";
 import { firebaseConfig } from "./config";
+import store from '../redux/store';
+import { ERROR_MESSAGE } from "../redux/system/system.types";
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -10,7 +12,13 @@ export const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 export const signInGoogle = () => firebase.auth().signInWithPopup(provider);
 
-export const signInWithEmailAndPassword = (email, password) => firebase.auth().signInWithEmailAndPassword(email, password)
+export const signInWithEmailAndPassword = async (email, password) => {
+  try {
+     await firebase.auth().signInWithEmailAndPassword(email, password)
+  } catch(err) {
+    store.dispatch({type: ERROR_MESSAGE, payload: err});
+  }
+}
 
 export const manageUserData = async (user) => {
 
