@@ -10,6 +10,7 @@ import "./styles.css";
 import {fetchCategories} from './redux/categories/categories.actions';
 import { setCurrentUser } from './redux/user/user.actions';
 import { cleanFeedbackMsg } from './redux/list/list.actions';
+import { cleanErrorMsg } from './redux/system/system.actions';
 
 import Header from "./components/Header";
 import ElementDetails from "./components/ElementDetails";
@@ -34,6 +35,8 @@ const App = (props) => {
   console.log(props);
   const selectList = state => state.list;
   const {feedbackMsg} = useSelector(selectList);
+  const systMsg = state => state.system;
+  const {error} = useSelector(systMsg)
   const dispatch = useDispatch(); 
   const history = useHistory();
 
@@ -42,9 +45,6 @@ const App = (props) => {
     auth.onAuthStateChanged( async user => {
       if (user) {
         // User is signed in.
-        const current = await manageUserData(user);
-        await dispatch(setCurrentUser(current));
-          
       } else {
         // User is signed out
         await dispatch(setCurrentUser(null));
@@ -62,7 +62,13 @@ const App = (props) => {
           history.push('/')
         },4000);
       }
-  },[feedbackMsg, dispatch, history]);
+      if(error) {
+        setTimeout(() => {
+          dispatch(cleanErrorMsg())
+          history.push('/')
+        },4000);
+      }
+  },[feedbackMsg,error, dispatch, history]);
 
   return (
     <div>
@@ -75,7 +81,7 @@ const App = (props) => {
         <Route path="/connection" exact component={Login} />
       </Switch>
       <Modal>
-            <FeedbackModal feedbackMsg={feedbackMsg} />
+            <FeedbackModal feedbackMsg={feedbackMsg} error={error} />
       </Modal>
     </div>
   );
