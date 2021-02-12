@@ -32,11 +32,12 @@ const ElementsList = ({onRemove, listItems}) => {
             </Link>}
             <div className="grid grid-cols-4 gap-4 py-8">
                 {filteredEls.map(el => 
-                        <ElementDetails 
-                            itemDet={el}
-                            categories={listCategories} 
-                            onRemove={onRemove}
-                            isAdmin={isAdmin} /> 
+                    <ElementDetails 
+                        key={el.id}
+                        itemDet={el}
+                        categories={listCategories} 
+                        onRemove={onRemove}
+                        isAdmin={isAdmin} /> 
                     )
                 }
             </div> 
