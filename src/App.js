@@ -45,6 +45,8 @@ const App = (props) => {
     auth.onAuthStateChanged( async user => {
       if (user) {
         // User is signed in.
+        const userManaged = await manageUserData(user);
+        await dispatch(setCurrentUser(userManaged));
       } else {
         // User is signed out
         await dispatch(setCurrentUser(null));
