@@ -27,9 +27,11 @@ const CategoriesWrapper = () => {
                     <Spinner bgColor={'text-black'} text={'loading categories'} />
             }
             { activeCategory &&
-                <ButtonIcon clickEvent={removeFilter} bgColor={'bg-red-500 hover:bg-red-700'}>
-                    <FontAwesomeIcon icon={faTimes} />
-                </ButtonIcon>
+                <div className="float-left ml-4 md:ml-0 mt-2 md:mt-0">
+                    <ButtonIcon clickEvent={removeFilter} bgColor={'bg-red-500 hover:bg-red-700'}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </ButtonIcon>
+                </div>
             }            
         </>
     )
