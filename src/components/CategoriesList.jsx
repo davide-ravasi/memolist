@@ -4,7 +4,7 @@ import CategoryBox from './CategoryBox';
 
 const CategoriesList = ({activeCategory, listCategories}) => { 
     return(
-        <div className="flex">
+        <div className="flex px-4 float-left">
             {listCategories.map(cat => (
                 <CategoryBox key={cat.name} name={cat.name} activeCategory={activeCategory} />))
             }         

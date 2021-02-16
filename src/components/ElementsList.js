@@ -30,7 +30,7 @@ const ElementsList = ({onRemove, listItems}) => {
             {isAdmin && <Link to='/element/add' className={stylesBtnAdd}>
                 <FontAwesomeIcon icon={faPlus} />
             </Link>}
-            <div className="grid grid-cols-4 gap-4 py-8">
+            <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 py-8 px-4 clear-both">
                 {filteredEls.map(el => 
                     <ElementDetails 
                         key={el.id}
