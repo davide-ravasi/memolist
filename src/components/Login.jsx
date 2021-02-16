@@ -17,7 +17,7 @@ const Login = () => {
             signInWithEmailAndPassword(email, password);
     }
 
-    return <div className="max-w-screen-lg mx-auto pt-5"> 
+    return <div className="max-w-screen-lg mx-auto pt-5 px-4"> 
         <LoginForm defaultValues={defaultValues} action={loginWithEmail} />
     </div>
 }

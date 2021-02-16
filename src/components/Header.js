@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { faThList, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -6,59 +6,98 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = ({ signIn, signOut }) => {
   const {currentUser} = useSelector(state => state.user);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const menuItemsCss =
     "px-6 py-1 text-white font-medium text-base hover:bg-gray-600 rounded-md";
 
+  const toggleMenu = () => {
+    setIsMenuVisible(!isMenuVisible);
+  }
+
   return (
     <div className="containe bg-gray-800 shadow-md">
-      <div className="mx-auto max-w-screen-lg flex h-16 flex items-center justify-between h-16">
-        <div className="min-h-full flex items-center justify-between">
-          <Link to="/" className="logo px-2 text-white text-xl text-indigo-300">
-            <FontAwesomeIcon icon={faThList} />
-          </Link>
-          <Link to="/" className={menuItemsCss}>
-            Home
-          </Link>
-          {/* <a href="#" className={menuItemsCss}>
-            All Lists
-          </a> */}
-          <a href="#" className={menuItemsCss}>
-            Categories
-          </a>
-          <Link to="/connection" className={menuItemsCss}>
-            Admin
-          </Link>
+      <div className="relative mx-auto max-w-screen-lg flex h-16 flex items-center justify-between h-16 z-10">
+        <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <button 
+            onClick={() => toggleMenu()}
+            className="
+                inline-flex items-center justify-center 
+                p-2 rounded-md text-gray-400 hover:text-white 
+                hover:bg-gray-700 focus:outline-none focus:ring-2 
+                focus:ring-inset focus:ring-white ml-4" 
+              aria-expanded="false">
+            <span className="sr-only">Open main menu</span>
+            <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg className="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div className={`
+                bg-gray-800 shadow-md w-full 
+                flex-grow lg:flex lg:items-center lg:w-auto 
+                ${!isMenuVisible && 'hidden'} 
+                lg:block pt-0 md:pt-6 mt-32 md:mt-0 lg:pt-0`} 
+                id="nav-content">
+          <ul className="list-reset lg:flex justify-start flex-1 items-center pt-10 md:pt-0">
+            {/* <li className="mr-3">
+              <Link to="/" className="logo px-2 text-white text-xl text-indigo-300">
+                <FontAwesomeIcon icon={faThList} />
+              </Link>
+            </li> */}
+            <li class="mr-3 my-2 md:my-0">
+              <Link to="/" className={menuItemsCss}>
+                Home
+              </Link>
+            </li>
+            <li class="mr-3 my-2 md:my-0">
+              <a href="#" className={menuItemsCss}>
+                Categories
+              </a>
+            </li>
+            <li className="mr-3 my-2 md:my-0">
+              <Link to="/connection" className={menuItemsCss}>
+                Admin
+              </Link>
+            </li>
+          </ul>
         </div>
 
-        {!currentUser && (
-          <div className="min-h-full flex items-center justify-between">
-            <span className={menuItemsCss}>You're not connected</span>
-            <a href="#" className={menuItemsCss} onClick={signIn}>
-              Login with Google
-            </a>
-          </div>
-        )}
-        {currentUser && (
-          <div className="min-h-full flex items-center justify-between">
-            <span className="px-6 py-1 text-white font-medium text-base text-indigo-300">
-              {currentUser.photoUrl ?
-                  <> 
-                  <FontAwesomeIcon className="mr-2" icon={faUser} /> 
-                  {currentUser.name}
-                  </>
-                :
-                  <span class="relative w-8 h-8 inline-block">
-                    <img class="rounded-full border border-gray-100 shadow-sm" src={currentUser.photo} alt="user image" />
-                    <span class="absolute -top-1 -right-1 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></span>
-                    <span className="absolute -bottom-1 -left-1">{currentUser.name}</span>
-                  </span>
-              }
-            </span>
-            <a href="#" className={menuItemsCss} onClick={signOut}>
-              Logout
-            </a>
-          </div>
-        )}
+        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          {!currentUser && (
+            <div className="min-h-full flex items-center justify-between">
+              <span className={menuItemsCss}>Not connected</span>
+              <a href="#" className={menuItemsCss} onClick={signIn}> 
+                Google Login
+              </a>
+            </div>
+          )}
+          {currentUser && (
+            <div className="min-h-full flex items-center justify-between">
+              <span className="relative px-6 py-1 text-white font-medium text-base text-indigo-300">
+                {currentUser.photoUrl ?
+                    <> 
+                    <FontAwesomeIcon className="mr-2" icon={faUser} /> 
+                    {currentUser.name}
+                    </>
+                  :
+                    <>
+                      <span class="relative w-8 h-8 inline-block">
+                        <img class="rounded-full border border-gray-100 shadow-sm -mt-1" src={currentUser.photo} alt="user image" />
+                        <span class="absolute -top-1 -right-1 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></span>
+                      </span>
+                      <span className="absolute bottom-0 left-0 right-0 text-xs leading-none text-center">{currentUser.name}</span>
+                    </>
+                }
+              </span>
+              <a href="#" className={menuItemsCss} onClick={signOut}>
+                Logout
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

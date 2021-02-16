@@ -27,7 +27,7 @@ const ElementEdit = () => {
     //     return () => unsubscribe();
     //   }, []);
 
-    return <div className="max-w-screen-lg mx-auto pt-5"> 
+    return <div className="max-w-screen-lg mx-auto pt-5 px-4"> 
         <ElementForm defaultValues={defaultValues} action={editElement} />
     </div>
 }
