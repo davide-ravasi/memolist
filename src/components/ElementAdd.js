@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { db } from "../firebase";
-
 import { addElement } from '../redux/list/list.actions';
 
 import ElementForm from './ElementForm';
@@ -24,7 +22,7 @@ const ElementAdd = () => {
     // }, []);
 
     return <div className="max-w-screen-lg mx-auto pt-5 px-4"> 
-        <ElementForm action={ addElement } userName={currentUser.name} />
+        <ElementForm action={ addElement } userName={currentUser ? currentUser.name : ''} />
     </div>
 }
 
