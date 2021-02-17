@@ -11,15 +11,15 @@ const HomePage = () => {
 
 
   useEffect(() => {
-   // dispatch(fetchList());
+    dispatch(fetchList());
   }, []);
 
   return (
     <div className="max-w-screen-lg mx-auto">
       <div className="my-8 relative">
-        {/* <CategoriesWrapper /> */}
+        <CategoriesWrapper />
       </div>
-      {/* <ElementsWrapper /> */}
+      <ElementsWrapper />
     </div>
   );
 };
