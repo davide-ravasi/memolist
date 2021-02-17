@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategories } from '../redux/categories/categories.actions';
+
+import BodyTextEditor from './Rte_texteditor';
 
 const resetValues = {
     name: '',
@@ -17,6 +19,7 @@ const ElementForm = ({ defaultValues, action, userName }) => {
     const dispatch = useDispatch();
     const selectCats = state => state.categories;
     const {listCategories} = useSelector(selectCats);
+    // const [rteValues, setRteValues] = useState('');
 
     const labelStyles = 'block text-md text-gray-7000 pt-2 pb-1';
     const inputStyles = 'w-full shadow-md p-1.5 text-sm border border-solid border-gray-300 rounded-lg';
@@ -24,6 +27,9 @@ const ElementForm = ({ defaultValues, action, userName }) => {
     let initialValues = defaultValues ? defaultValues : resetValues;
     const requiredMsg = 'This field is required';
 
+    // const setFormValue = (value) => {
+    //     setRteValues(value);
+    // }
 
     useEffect(() => {
         dispatch(fetchCategories());
@@ -41,23 +47,23 @@ const ElementForm = ({ defaultValues, action, userName }) => {
 
         if (!values.color) {
             errors.color = requiredMsg;
-        } else if (values.color.length != 6) {
+        } else if (values.color.length !== 6) {
             errors.color = 'The color code must be an exadecimal number. Ex. 000000';
-        }
-
-        if (!values.link) {
-            errors.link = requiredMsg;
         }
 
         if (!values.text) {
             errors.text = requiredMsg;
         }
 
+        if (!values.link) {
+            errors.link = requiredMsg;
+        }
+
         return errors;
     };
 
     return <Formik  
-        initialValues={initialValues}     
+        initialValues={initialValues}
         onSubmit={(values) => {
             dispatch(action(values, userName));
         }}
@@ -71,7 +77,8 @@ const ElementForm = ({ defaultValues, action, userName }) => {
                     <div className={error}>{errors.name}</div>
                 ) : null}
                 <label htmlFor="text" className={labelStyles}>Text</label>
-                <Field id="text" name="text" placeholder="Text" className={inputStyles} />
+                {/* <BodyTextEditor setFormValue={setFormValue} /> */}
+                <Field as="textarea" id="text" name="text" placeholder="Code snippet" className={inputStyles} />
                 {errors.text && touched.text ? (
                     <div className={error}>{errors.text}</div>
                 ) : null}
@@ -90,7 +97,6 @@ const ElementForm = ({ defaultValues, action, userName }) => {
                     <Field as="select" name="category" id="category" className={inputStyles}>
                         {listCategories.map(cat => <option value={cat.name}>{cat.name}</option>)}
                     </Field>
-                    
                 : 
                     <span>....loading categories</span>
                 }       
@@ -103,13 +109,3 @@ const ElementForm = ({ defaultValues, action, userName }) => {
 }
 
 export default ElementForm;
-
-/*
-                {listCategories && listCategories.length ?
-                    <Field as="select" name="category" id="category" className={inputStyles}>
-                        {listCategories.map(cat => <option value={cat}>{cat}</option>)}
-                    </Field>
-                : 
-                    <span>....loading categories</span>
-                } 
-*/

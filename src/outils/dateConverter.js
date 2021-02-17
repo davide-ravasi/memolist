@@ -1,5 +1,5 @@
 export const convertDateFromTimestamp = ({seconds}) => {
-    const a = new Date(seconds);
+    const a = new Date(seconds*1000);
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     const year = a.getFullYear();
     const month = months[a.getMonth()];
