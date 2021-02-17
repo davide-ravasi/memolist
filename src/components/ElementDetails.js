@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+//import parse from 'html-react-parser';
 
 import { convertDateFromTimestamp } from '../outils/dateConverter';
 
 import { faLink, faPen, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const ElementDetails = ({itemDet, categories, onRemove, isAdmin}) => {
     const {id, category, link, text, name, created_at, userName} = itemDet;
@@ -20,7 +23,11 @@ const ElementDetails = ({itemDet, categories, onRemove, isAdmin}) => {
         <div key={id} className="bg-white rounded-md p-3 shadow-xl relative">
             <div className="text-gray-900 text-xl">{name}</div>
             <span className="text-gray-600 bg-gray-100 uppercase shadow-xl px-1 text-xs rounded" style={cat ? {backgroundColor: cat.color} : {}}>{category}</span>
-            <div className="text-gray-500 text-sm">{text}</div>
+            <div className="text-gray-500 text-sm">
+                <SyntaxHighlighter language="javascript" style={a11yDark}>
+                    {text} 
+                </SyntaxHighlighter>
+            </div>
             <div className="text-gray-400 text-xs pt-2">Created: {createdAtConverted}<br /> {userName && `by ${userName}`}</div>
 
             { link && <Link to={link} className={`${roundbtnStyles} top-3 right-2 bg-gray-400 hover:bg-gray-700`}>
