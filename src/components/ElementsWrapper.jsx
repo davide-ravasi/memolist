@@ -7,6 +7,7 @@ import Modal from './ModalPortal';
 import ConfirmModal from './ConfirmModal';
 import ElementsList from './ElementsList';
 import Spinner from './Spinner';
+import { faTableTennis } from '@fortawesome/free-solid-svg-icons';
 
 const ElementsWrapper = () => {
     const [modalShow, setModalShow] = useState(false);
