@@ -22,13 +22,13 @@ const ElementDetails = ({itemDet, categories, onRemove, isAdmin}) => {
     return (
         <div key={id} className="bg-white rounded-md p-3 shadow-xl relative">
             <div className="text-gray-900 text-xl">{name}</div>
-            <span className="text-gray-600 bg-gray-100 uppercase shadow-xl px-1 text-xs rounded" style={cat ? {backgroundColor: cat.color} : {}}>{category}</span>
-            <div className="text-gray-500 text-sm">
+            <span className="text-gray-700 bg-gray-100 uppercase shadow-xl p-1 text-xs rounded" style={cat ? {backgroundColor: cat.color} : {}}>{category}</span>
+            <div className="text-gray-500 text-xs mt-4 mb-10">
                 <SyntaxHighlighter language="javascript" style={a11yDark}>
                     {text} 
                 </SyntaxHighlighter>
             </div>
-            <div className="text-gray-400 text-xs pt-2">Created: {createdAtConverted}<br /> {userName && `by ${userName}`}</div>
+            <div className="absolute text-gray-400 text-xs pt-2 left-3 bottom-2">Created: {createdAtConverted}<br /> {userName && `by ${userName}`}</div>
 
             { link && <Link to={link} className={`${roundbtnStyles} top-3 right-2 bg-gray-400 hover:bg-gray-700`}>
                 <FontAwesomeIcon icon={faLink} />

@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategories } from '../redux/categories/categories.actions';
 
-import BodyTextEditor from './Rte_texteditor';
+//import BodyTextEditor from './Rte_texteditor';
 
 const resetValues = {
     name: '',
     text: '',
     color: '',
     link: '',
-    category: 'React',
+    category: 'react',
     status: 1,
     userId: ''
 }
