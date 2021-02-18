@@ -18,6 +18,7 @@ const FeedbackModal = ({feedbackMsg, error, callBackAction}) => {
                         <div className="mt-2">
                         <p className="text-sm text-white">
                             {feedbackMsg}
+                            {error}
                             {error && error.name} {error && error.code}
                         </p>
                         </div>

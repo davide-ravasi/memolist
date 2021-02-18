@@ -70,7 +70,7 @@ const App = (props) => {
           history.push('/')
         },4000);
       }
-  },[feedbackMsg,error, dispatch, history]);
+  },[feedbackMsg, error, dispatch, history]);
 
   return (
     <div>
