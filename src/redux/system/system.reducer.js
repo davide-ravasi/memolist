@@ -9,9 +9,7 @@ const systemReducer = (state = initialState, action) => {
     switch(action.type) {
         case ERROR_MESSAGE:
             return {
-                error: {
-                    ...action.payload
-                }
+                error: action.payload
         }
         case CLEAN_ERROR_MESSAGE:
             return {
