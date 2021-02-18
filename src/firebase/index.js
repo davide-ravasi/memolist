@@ -63,7 +63,6 @@ export const checkIsAdmin = async (currentUser) => {
   if(userDoc.exists && userDoc.data().role === 'admin') {
     return true;
   }
-
+  
   return false;
-
 }

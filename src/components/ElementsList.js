@@ -12,6 +12,8 @@ const ElementsList = ({onRemove, listItems}) => {
     const {listCategories, activeCategory} = useSelector(selectCats);
     const selectUser = state => state.user;
     const {currentUser} = useSelector(selectUser);
+    const wishlistEls = state => state.wishlist;
+    const wishlist = useSelector(wishlistEls)
     const [isAdmin, setIsAdmin] = useState(false);
 
     const stylesBtnAdd = `flex justify-center items-center text-white 
@@ -37,7 +39,9 @@ const ElementsList = ({onRemove, listItems}) => {
                         itemDet={el}
                         categories={listCategories} 
                         onRemove={onRemove}
-                        isAdmin={isAdmin} /> 
+                        isAdmin={isAdmin}
+                        currentUser={currentUser}
+                        wishlist={wishlist} /> 
                     )
                 }
             </div> 
