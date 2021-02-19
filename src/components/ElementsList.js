@@ -16,7 +16,7 @@ const ElementsList = ({onRemove, listItems}) => {
     const wishlist = useSelector(wishlistEls)
     const [isAdmin, setIsAdmin] = useState(false);
 
-    const stylesBtnAdd = `flex justify-center items-center text-white 
+    const stylesBtnAdd = `absolute right-4 top-0 flex justify-center items-center text-white 
     text-sm absolute right-2 rounded-full h-8 w-8 
     bg-green-600 hover:bg-green-800 transition duration-500 ease-in-out`;
 
@@ -28,11 +28,13 @@ const ElementsList = ({onRemove, listItems}) => {
       }, [currentUser]);
 
     return (
-        <>
+        <div className="relative">
+            <h2 className="text-md ml-4">Filtered by: {activeCategory ? activeCategory : 'All categories'}</h2>
+            <p className="text-sm text-gray-600 ml-4">Total snippets: {filteredEls.length}</p>
             {isAdmin && <Link to='/element/add' className={stylesBtnAdd}>
                 <FontAwesomeIcon icon={faPlus} />
             </Link>}
-            <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4 py-8 px-4 clear-both">
+            <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4 pt-4 pb-8 px-4 clear-both">
                 {filteredEls.map(el => 
                     <ElementDetails 
                         key={el.id}
@@ -45,7 +47,7 @@ const ElementsList = ({onRemove, listItems}) => {
                     )
                 }
             </div> 
-        </> 
+        </div> 
 )}
 
 export default ElementsList;
