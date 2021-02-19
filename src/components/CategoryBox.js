@@ -10,7 +10,7 @@ const CategoryBox = ({name, activeCategory}) => {
     const dispatch= useDispatch();
 
     return (
-        <div className={classBox} onClick={() => {dispatch(setActiveCategory(name))}}>{name}</div>
+        <button className={classBox} onClick={() => {dispatch(setActiveCategory(name))}} title={`Filter only ${name} snippets`}>{name}</button>
     )
 }
 
