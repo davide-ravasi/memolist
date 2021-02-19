@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,8 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Header = ({ signIn, signOut }) => {
   const {currentUser} = useSelector(state => state.user);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const menuItemsCss =
-    "px-6 py-1 text-white font-medium text-base hover:bg-gray-600 rounded-md";
+  const menuItemsCss = "px-6 py-1 text-white font-medium text-base hover:bg-gray-600 rounded-md";
 
   const toggleMenu = () => {
     setIsMenuVisible(!isMenuVisible);
@@ -48,9 +47,14 @@ const Header = ({ signIn, signOut }) => {
               </Link>
             </li> */}
             <li class="mr-3 my-2 md:my-0">
-              <Link to="/" className={menuItemsCss}>
+              <NavLink to="/" className={menuItemsCss} exact={true}>
                 Home
-              </Link>
+              </NavLink>
+            </li>
+            <li class="mr-3 my-2 md:my-0">
+              <NavLink to="/wishlist" className={menuItemsCss}>
+                My Wishlist
+              </NavLink>
             </li>
             {/* <li class="mr-3 my-2 md:my-0">
               <a href="#" className={menuItemsCss}>
@@ -58,9 +62,9 @@ const Header = ({ signIn, signOut }) => {
               </a>
             </li> */}
             <li className="mr-3 my-2 md:my-0">
-              <Link to="/connection" className={menuItemsCss}>
+              <NavLink to="/connection" className={menuItemsCss}>
                 Admin
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
