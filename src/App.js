@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { auth, signInGoogle, manageUserData } from "./firebase";
 
@@ -15,6 +15,7 @@ import { cleanErrorMsg } from './redux/system/system.actions';
 import Header from "./components/Header";
 import ElementDetails from "./components/ElementDetails";
 import HomePage from "./pages/HomePage";
+import Wishlist from './pages/Wishlist';
 import ElementAdd from "./components/ElementAdd";
 import ElementEdit from "./components/ElementEdit";
 import Login from './components/Login';
@@ -32,13 +33,13 @@ const signOut = (e) => {
 };
 
 const App = (props) => {
-  console.log(props);
   const selectList = state => state.list;
   const {feedbackMsg} = useSelector(selectList);
   const systMsg = state => state.system;
   const {error} = useSelector(systMsg)
   const dispatch = useDispatch(); 
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     // @TODO : you have to add the unsuscribe method for this listener
@@ -47,7 +48,9 @@ const App = (props) => {
         // User is signed in.
         const userManaged = await manageUserData(user);
         await dispatch(setCurrentUser(userManaged));
-        history.push('/')
+
+        // if on page connection and user exists
+        if (location.pathname === '/connection') {history.push('/')}
       } else {
         // User is signed out
         await dispatch(setCurrentUser(null));
@@ -56,7 +59,7 @@ const App = (props) => {
 
     dispatch(fetchCategories());
 
-  }, [dispatch]);
+  }, [dispatch, location]);
 
   useEffect(() => {
       if(feedbackMsg) {
@@ -77,7 +80,8 @@ const App = (props) => {
     <div>
       <Header signIn={signIn} signOut={signOut} />
       <Switch>
-        <Route path="/" exact component={HomePage} />       
+        <Route path="/" exact component={HomePage} />     
+        <Route path="/wishlist" exact component={Wishlist} />  
         <Route path="/element/add" exact component={ElementAdd} />
         <Route path="/element/edit/:id" exact component={ElementEdit} />
         <Route path="/element/:id" exact component={ElementDetails} />
