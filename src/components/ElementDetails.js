@@ -56,7 +56,12 @@ const ElementDetails = ({itemDet, categories, onRemove, isAdmin, currentUser, wi
                     value={text}
                     />
                 </form>
-                <SyntaxHighlighter language="javascript" style={a11yDark}>
+                <SyntaxHighlighter 
+                    lineProps={{style: {wordBreak: 'break-all', whiteSpace: 'pre-wrap'}}}
+                    wrapLines={true}  
+                    language={`${category === 'css' ? 'css' : 'javascript'}`} 
+                    style={a11yDark}
+                >
                     {text} 
                 </SyntaxHighlighter>
             </div>
