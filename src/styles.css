@@ -4,7 +4,10 @@
 
 @tailwind utilities;
 
-
 body {
-    background-color: #eef1f9;
+  background-color: #eef1f9;
+}
+
+a.active {
+  color: #a5b4fc;
 }
