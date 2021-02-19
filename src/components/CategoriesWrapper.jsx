@@ -28,7 +28,7 @@ const CategoriesWrapper = () => {
             }
             { activeCategory &&
                 <div className="float-left md:ml-0 mt-2 md:mt-0">
-                    <ButtonIcon clickEvent={removeFilter} bgColor={'bg-red-500 hover:bg-red-700'}>
+                    <ButtonIcon clickEvent={removeFilter} bgColor={'bg-red-500 hover:bg-red-700'} title='Remove filter'>
                         <FontAwesomeIcon icon={faTimes} />
                     </ButtonIcon>
                 </div>

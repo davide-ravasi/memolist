@@ -47,7 +47,7 @@ const ElementDetails = ({itemDet, categories, onRemove, isAdmin, currentUser, wi
             <div className="text-gray-900 text-xl">{name}</div>
             <span className="text-gray-700 bg-gray-100 uppercase shadow-xl p-1 text-xs rounded" style={cat ? {backgroundColor: cat.color} : {}}>{category}</span>
             <div className="relative text-gray-500 text-xs mt-4 mb-10">
-                <button onClick={(e) => copyToClipboard(e)}  className={`${roundbtnStyles} absolute bg-gray-400 top-1 right-2 hover:bg-blue-500`}>
+                <button title="Copy to clipboard" onClick={(e) => copyToClipboard(e)}  className={`${roundbtnStyles} absolute bg-gray-400 top-1 right-2 hover:bg-blue-500`}>
                     <FontAwesomeIcon icon={faCopy} />   
                 </button>    
                 <form className="absolute opacity-0">
@@ -74,25 +74,26 @@ const ElementDetails = ({itemDet, categories, onRemove, isAdmin, currentUser, wi
                                 : 
                                 dispatch(addToWishlist(currentUser.uid, id))
                     } 
+                    title={favourite ? 'Remove from wishlist' : 'Add to wishlist'}
                     className={`${roundbtnStyles} ${favourite ? 'selected bg-red-400' : 'bg-gray-400'} top-3 right-9 hover:bg-red-600`}
                 >
                     <FontAwesomeIcon icon={faHeart} />
                 </button>
             }
 
-            { link && <Link to={link} className={`${roundbtnStyles} top-3 right-2 bg-gray-400 hover:bg-gray-700`}>
+            { link && <a href={link} target="_blank" rel="noreferrer" title="Visit the source for this snippet" className={`${roundbtnStyles} top-3 right-2 bg-gray-400 hover:bg-gray-700`}>
                     <FontAwesomeIcon icon={faLink} />
-                </Link>
+                </a>
             }    
             
             { isAdmin &&
                 <>
-                <Link to={`/element/edit/${id}`} className={`${roundbtnStyles} bottom-3 right-9 bg-gray-400 hover:bg-green-700`}>
+                <Link to={`/element/edit/${id}`} title="Edit this snippet" className={`${roundbtnStyles} bottom-3 right-9 bg-gray-400 hover:bg-green-700`}>
                     <FontAwesomeIcon icon={faPen} />
                 </Link>
-                <div className={`${roundbtnStyles} bottom-3 right-2 bg-red-400 hover:bg-red-700 cursor-pointer`} onClick={() => onRemove(itemDet)}>
+                <button title="Remove this snippet" className={`${roundbtnStyles} bottom-3 right-2 bg-red-400 hover:bg-red-700 cursor-pointer`} onClick={() => onRemove(itemDet)}>
                     <FontAwesomeIcon icon={faTimes} />
-                </div>
+                </button>
                 </>
             }
         </div>
