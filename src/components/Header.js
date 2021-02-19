@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { faThList, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = ({ signIn, signOut }) => {
@@ -52,11 +52,11 @@ const Header = ({ signIn, signOut }) => {
                 Home
               </Link>
             </li>
-            <li class="mr-3 my-2 md:my-0">
+            {/* <li class="mr-3 my-2 md:my-0">
               <a href="#" className={menuItemsCss}>
                 Categories
               </a>
-            </li>
+            </li> */}
             <li className="mr-3 my-2 md:my-0">
               <Link to="/connection" className={menuItemsCss}>
                 Admin
