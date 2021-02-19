@@ -77,6 +77,9 @@ const ElementForm = ({ defaultValues, action, userName }) => {
                     <div className={error}>{errors.name}</div>
                 ) : null}
                 <label htmlFor="text" className={labelStyles}>Text</label>
+                {/**
+                * @todo: add rte description field
+                 */}
                 {/* <BodyTextEditor setFormValue={setFormValue} /> */}
                 <Field as="textarea" id="text" name="text" placeholder="Code snippet" className={inputStyles} />
                 {errors.text && touched.text ? (
