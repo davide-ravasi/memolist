@@ -41,11 +41,6 @@ const Header = ({ signIn, signOut }) => {
                 lg:block pt-0 md:pt-6 mt-32 md:mt-0 lg:pt-0`} 
                 id="nav-content">
           <ul className="list-reset lg:flex justify-start flex-1 items-center pt-10 md:pt-0">
-            {/* <li className="mr-3">
-              <Link to="/" className="logo px-2 text-white text-xl text-indigo-300">
-                <FontAwesomeIcon icon={faThList} />
-              </Link>
-            </li> */}
             <li class="mr-3 my-2 md:my-0">
               <NavLink to="/" className={menuItemsCss} exact={true}>
                 Home

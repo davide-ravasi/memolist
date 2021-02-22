@@ -1,5 +1,5 @@
 import { SET_CURRENT_USER } from "./user.types";
-import { FETCH_WISHLIST, REMOVE_WISHLIST } from '../wishlist/wishlist.types';
+import { FETCH_WISHLIST } from '../wishlist/wishlist.types';
 import { ERROR_MESSAGE } from '../system/system.types';
 
 import { checkIsAdmin } from '../../firebase/index';
