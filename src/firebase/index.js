@@ -6,6 +6,8 @@ import { ERROR_MESSAGE } from "../redux/system/system.types";
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// init firestore and auth
+// refs: https://firebase.google.com/docs/web/setup
 export const db = firebase.firestore();
 export const auth = firebase.auth();
 

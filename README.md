@@ -59,7 +59,9 @@ var firebaseConfig = {
 };
 ```
 
-add it in :
+Create a file named config.js in src/firebase/ folder and add the configuration code in it.
+
+IMPORTANT-> The final structure must be:
 src -> firebase -> config.js
 
 Refs: [firebase docs](https://firebase.google.com/docs/web/setup)
