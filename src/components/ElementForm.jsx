@@ -8,7 +8,6 @@ import { fetchCategories } from '../redux/categories/categories.actions';
 const resetValues = {
     name: '',
     text: '',
-    color: '',
     link: '',
     category: 'react',
     status: 1,
@@ -45,12 +44,6 @@ const ElementForm = ({ defaultValues, action, userName }) => {
             errors.name = 'At least 4 characters';
         }
 
-        if (!values.color) {
-            errors.color = requiredMsg;
-        } else if (values.color.length !== 6) {
-            errors.color = 'The color code must be an exadecimal number. Ex. 000000';
-        }
-
         if (!values.text) {
             errors.text = requiredMsg;
         }
@@ -84,11 +77,6 @@ const ElementForm = ({ defaultValues, action, userName }) => {
                 <Field as="textarea" id="text" name="text" placeholder="Code snippet" className={inputStyles} />
                 {errors.text && touched.text ? (
                     <div className={error}>{errors.text}</div>
-                ) : null}
-                <label htmlFor="color" className={labelStyles}>Color</label>
-                <Field id="color" name="color" placeholder="Color" className={inputStyles} />
-                {errors.color && touched.color ? (
-                    <div className={error}>{errors.color}</div>
                 ) : null}
                 <label htmlFor="link" className={labelStyles}>Link</label>
                 <Field id="link" name="link" placeholder="Link" className={inputStyles} />
