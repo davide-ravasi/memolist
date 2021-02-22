@@ -28,7 +28,6 @@ export const editElement = (el) => async dispatch => {
     const editEl = await db.collection('notes').doc(el.id).set({...el});
     dispatch({ type: EDIT_ELEMENT, payload: el});
   } catch(err) {
-    console.log('err', err);
     dispatch({ type: ERROR_MESSAGE, payload: {...err} });
   }
 }
