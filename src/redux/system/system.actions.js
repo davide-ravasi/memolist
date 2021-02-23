@@ -1,7 +1,8 @@
 import { ERROR_MESSAGE, CLEAN_ERROR_MESSAGE } from './system.types';
+import convertErrorMessages from '../../outils/convertErrorMessages';
 
 export const errorMessage = (err) => (
-    { type: ERROR_MESSAGE, payload: err }
+    { type: ERROR_MESSAGE, payload: convertErrorMessages(err) }
 ) 
 
 export const cleanErrorMsg = () => (
