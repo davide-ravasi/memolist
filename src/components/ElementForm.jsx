@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCategories } from '../redux/categories/categories.actions';
+import BodyTextEditor from './Rte_texteditor';
 
-//import BodyTextEditor from './Rte_texteditor';
+import { fetchCategories } from '../redux/categories/categories.actions';
 
 const resetValues = {
     name: '',
     text: '',
     link: '',
     category: 'react',
+    description: '',
     status: 1,
     userId: ''
 }
@@ -18,7 +19,7 @@ const ElementForm = ({ defaultValues, action, userName }) => {
     const dispatch = useDispatch();
     const selectCats = state => state.categories;
     const {listCategories} = useSelector(selectCats);
-    // const [rteValues, setRteValues] = useState('');
+    const [rteValues, setRteValues] = useState('');
 
     const labelStyles = 'block text-md text-gray-7000 pt-2 pb-1';
     const inputStyles = 'w-full shadow-md p-1.5 text-sm border border-solid border-gray-300 rounded-lg';
@@ -26,9 +27,9 @@ const ElementForm = ({ defaultValues, action, userName }) => {
     let initialValues = defaultValues ? defaultValues : resetValues;
     const requiredMsg = 'This field is required';
 
-    // const setFormValue = (value) => {
-    //     setRteValues(value);
-    // }
+    const setFormValue = (value) => {
+         setRteValues(value);
+    }
 
     useEffect(() => {
         dispatch(fetchCategories());
@@ -58,22 +59,20 @@ const ElementForm = ({ defaultValues, action, userName }) => {
     return <Formik  
         initialValues={initialValues}
         onSubmit={(values) => {
-            dispatch(action(values, userName));
+            dispatch(action(values, rteValues.toString('html'), userName));
         }}
         validate={validate}
       >
         {({ errors, touched }) => (
-            <Form className="max-w-sm mx-auto">
+            <Form className="max-w-md mx-auto">
                 <label htmlFor="name" className={labelStyles}>Title</label>
                 <Field id="name" name="name" placeholder="Title" className={inputStyles} />
                 {errors.name && touched.name ? (
                     <div className={error}>{errors.name}</div>
                 ) : null}
+                <label htmlFor="description" className={labelStyles}>Description</label>
+                <BodyTextEditor name="description" setFormValue={setFormValue} initialDescription={initialValues.description} />
                 <label htmlFor="text" className={labelStyles}>Text</label>
-                {/**
-                * @todo: add rte description field
-                 */}
-                {/* <BodyTextEditor setFormValue={setFormValue} /> */}
                 <Field as="textarea" id="text" name="text" placeholder="Code snippet" className={inputStyles} />
                 {errors.text && touched.text ? (
                     <div className={error}>{errors.text}</div>

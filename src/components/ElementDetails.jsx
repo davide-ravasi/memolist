@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-//import parse from 'html-react-parser';
+import parse from 'html-react-parser';
 import { useDispatch } from 'react-redux';
 
 import { addToWishlist, removeFromWishlist } from '../redux/wishlist/wishlist.actions';
@@ -14,7 +14,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const ElementDetails = ({itemDet, categories, onRemove, isAdmin, currentUser, wishlist}) => {
-    const {id, category, link, text, name, created_at, userName} = itemDet;
+    const {id, category, description, link, text, name, created_at, userName} = itemDet;
     const createdAtConverted = convertDateFromTimestamp(created_at);
 
     const [favourite, setFavourite] = useState(false);
@@ -45,9 +45,22 @@ const ElementDetails = ({itemDet, categories, onRemove, isAdmin, currentUser, wi
     return (
         <div key={id} className="bg-white rounded-md p-3 shadow-xl relative">
             <div className="text-gray-900 text-xl">{name}</div>
-            <span className="text-gray-700 bg-gray-100 uppercase shadow-xl p-1 text-xs rounded" style={cat ? {backgroundColor: cat.color} : {}}>{category}</span>
-            <div className="relative text-gray-500 text-xs mt-4 mb-10">
-                <button title="Copy to clipboard" onClick={(e) => copyToClipboard(e)}  className={`${roundbtnStyles} absolute bg-gray-400 top-1 right-2 hover:bg-blue-500`}>
+            <span className="text-gray-700 bg-gray-100 uppercase shadow-xl p-1 text-xs rounded" 
+                  style={cat ? {backgroundColor: cat.color} : {}}>
+                    {category}
+            </span>
+            {   
+                description && 
+                description.replace(/<\/?[^>]+(>|$)/g, "") !== '' && 
+                <div className="text-gray-500 mt-4 text-sm">
+                  {parse(description)}
+                </div>
+            }
+            <div className="relative text-gray-500 text-xs mt-2 mb-10">
+                <button title="Copy to clipboard" 
+                        onClick={(e) => copyToClipboard(e)}  
+                        className={`${roundbtnStyles} absolute bg-gray-400 top-1 right-2 hover:bg-blue-500`}
+                >
                     <FontAwesomeIcon icon={faCopy} />   
                 </button>    
                 <form className="absolute opacity-0">
