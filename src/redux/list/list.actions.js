@@ -14,18 +14,18 @@ export const fetchList = () => async function(dispatch) {
   
 }
 
-export const addElement = (el, name) => async dispatch => {
+export const addElement = (el, description, name) => async dispatch => {
   try {
-    const addEl = await db.collection('notes').add({...el, userName: name, created_at: new Date()});
+    const addEl = await db.collection('notes').add({...el, description: description, userName: name, created_at: new Date()});
     dispatch({ type: ADD_ELEMENT, payload: el});
   } catch(err) {
     dispatch({ type: ERROR_MESSAGE, payload: {...err} });
   }
 }
 
-export const editElement = (el) => async dispatch => {
+export const editElement = (el, description) => async dispatch => {
   try {
-    const editEl = await db.collection('notes').doc(el.id).set({...el});
+    const editEl = await db.collection('notes').doc(el.id).set({...el, description: description });
     dispatch({ type: EDIT_ELEMENT, payload: el});
   } catch(err) {
     dispatch({ type: ERROR_MESSAGE, payload: {...err} });
