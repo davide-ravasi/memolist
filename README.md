@@ -87,3 +87,8 @@ Project is created with:
 - add flash card interview questions section
 - add favourites articles section with content description
 - add admin section to manage categories list
+
+## Logs
+
+- 03-03-2021 -> added search engine on homepage
+- 26-02-2021 -> added descriptions (with react-rte) on snippets contents

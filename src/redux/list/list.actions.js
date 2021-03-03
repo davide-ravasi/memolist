@@ -1,4 +1,4 @@
-import { FETCH_LIST, ADD_ELEMENT, EDIT_ELEMENT, REMOVE_ELEMENT, CLEAN_FEEDBACK_MSG } from "./list.types";
+import { FETCH_LIST, ADD_ELEMENT, EDIT_ELEMENT, REMOVE_ELEMENT, CLEAN_FEEDBACK_MSG, UPDATE_SEARCH_TERM } from "./list.types";
 import { ERROR_MESSAGE } from '../system/system.types';
 import { db } from "../../firebase";
 
@@ -44,3 +44,8 @@ export const removeElement = (el) => async dispatch => {
 export const cleanFeedbackMsg = () => (
   {type: CLEAN_FEEDBACK_MSG}
 )
+
+export const updateSearchterm = (searchTerm) => ({
+  type: UPDATE_SEARCH_TERM,
+  payload: searchTerm
+})
