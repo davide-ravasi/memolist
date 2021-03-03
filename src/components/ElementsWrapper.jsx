@@ -1,48 +1,58 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { removeElement } from '../redux/list/list.actions';
+import { removeElement } from "../redux/list/list.actions";
 
-import Modal from './ModalPortal';
-import ConfirmModal from './ConfirmModal';
-import ElementsList from './ElementsList';
-import Spinner from './Spinner';
+import Modal from "./ModalPortal";
+import ConfirmModal from "./ConfirmModal";
+import ElementsList from "./ElementsList";
+import Spinner from "./Spinner";
 
 const ElementsWrapper = () => {
-    const [modalShow, setModalShow] = useState(false);
-    const [elToRemove, setElToRemove] = useState();
+  const [modalShow, setModalShow] = useState(false);
+  const [elToRemove, setElToRemove] = useState();
 
-    const selectEls = state => state.list;
-    const {listItems} = useSelector(selectEls);
+  const selectEls = (state) => state.list;
+  const { listItems, searchTerm } = useSelector(selectEls);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const onCloseModal = () => {
-        setModalShow(false);
-        setElToRemove();
-    }
-    
-    const onConfirmModal = () => {
-        setModalShow(false);
-        dispatch(removeElement(elToRemove));
-    }
+  const onCloseModal = () => {
+    setModalShow(false);
+    setElToRemove();
+  };
 
-    const onRemove = (item) => {
-        setModalShow(true);
-        setElToRemove(item);
-    }
+  const onConfirmModal = () => {
+    setModalShow(false);
+    dispatch(removeElement(elToRemove));
+  };
 
-    return (
+  const onRemove = (item) => {
+    setModalShow(true);
+    setElToRemove(item);
+  };
+
+  return (
     <>
-        {listItems.length ? 
-            <ElementsList onRemove={onRemove} listItems={listItems} /> :
-            <Spinner bgColor={'text-black'} text={'loading elements list'} />
-        }
+      {listItems.length ? (
+        <ElementsList
+          onRemove={onRemove}
+          listItems={listItems}
+          searchTerm={searchTerm}
+        />
+      ) : (
+        <Spinner bgColor={"text-black"} text={"loading elements list"} />
+      )}
 
-        <Modal>
-            <ConfirmModal modalShow={modalShow} closeModal={onCloseModal} confirmModal={onConfirmModal} />
-        </Modal>
-    </>  
-)}
+      <Modal>
+        <ConfirmModal
+          modalShow={modalShow}
+          closeModal={onCloseModal}
+          confirmModal={onConfirmModal}
+        />
+      </Modal>
+    </>
+  );
+};
 
 export default ElementsWrapper;

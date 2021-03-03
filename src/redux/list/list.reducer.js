@@ -1,10 +1,11 @@
-import { ADD_ELEMENT, FETCH_LIST, EDIT_ELEMENT, REMOVE_ELEMENT, CLEAN_FEEDBACK_MSG } from "./list.types";
+import { ADD_ELEMENT, FETCH_LIST, EDIT_ELEMENT, REMOVE_ELEMENT, CLEAN_FEEDBACK_MSG, UPDATE_SEARCH_TERM } from "./list.types";
 
 import addElementToArray from '../../outils/addElementToArray';
 import removeElementFromArray from '../../outils/removeElementFromArray';
 
 const initialState = {
   listItems: [],
+  searchTerm: '',
   feedbackMsg: ''
 }
 
@@ -37,6 +38,11 @@ const listReducer =  (state = initialState, action) => {
       return {
         ...state,
         feedbackMsg: ''
+      }  
+    case UPDATE_SEARCH_TERM:
+      return {
+        ...state,
+        searchTerm: action.payload
       }  
     default:
       return state
