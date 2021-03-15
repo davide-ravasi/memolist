@@ -55,14 +55,21 @@ var firebaseConfig = {
   storageBucket: "PROJECT_ID.appspot.com",
   messagingSenderId: "SENDER_ID",
   appId: "APP_ID",
-  measurementId: "G-MEASUREMENT_ID",
 };
 ```
 
-Create a file named config.js in src/firebase/ folder and add the configuration code in it.
+Create a file named .env application root folder and add the configuration code in the variables using the code that you can find in file .env_sample in the root folder.
 
-IMPORTANT-> The final structure must be:
-src -> firebase -> config.js
+Your code must be like this:
+```
+REACT_APP_FIREBASE_APIKEY="API_KEY"
+REACT_APP_FIREBASE_AUTHDOMAIN="PROJECT_ID.firebaseapp.com"
+REACT_APP_FIREBASE_DATABASEURL="https://PROJECT_ID.firebaseio.com"
+REACT_APP_FIREBASE_PROJECTID="PROJECT_ID"
+REACT_APP_FIREBASE_STORAGEBUCKET="PROJECT_ID.appspot.com"
+REACT_APP_FIREBASE_MESSAGINGSENDERID="SENDER_ID"
+REACT_APP_FIREBASE_APPID="APP_ID"
+```
 
 Refs: [firebase docs](https://firebase.google.com/docs/web/setup)
 
@@ -90,5 +97,6 @@ Project is created with:
 
 ## Logs
 
+- 15-03-2021 => added .env file with firebase configuration datas
 - 03-03-2021 -> added search engine on homepage
 - 26-02-2021 -> added descriptions (with react-rte) on snippets contents
