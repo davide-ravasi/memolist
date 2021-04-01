@@ -12,8 +12,11 @@ export const setCurrentUser = user => async dispatch => {
     if(user) {
       const wishlistRef = await db.collection('wishlist').doc(user.uid);
       const wishlistDoc = await wishlistRef.get();
-      const {list} = wishlistDoc.data();
-      wishlist = list;
+
+      if(wishlistDoc.exists) {
+        const {list} = wishlistDoc.data();
+        wishlist = list;
+      }
 
       user = {
         uid: user.uid,
