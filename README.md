@@ -61,6 +61,7 @@ var firebaseConfig = {
 Create a file named .env application root folder and add the configuration code in the variables using the code that you can find in file .env_sample in the root folder.
 
 Your code must be like this:
+
 ```
 REACT_APP_FIREBASE_APIKEY="API_KEY"
 REACT_APP_FIREBASE_AUTHDOMAIN="PROJECT_ID.firebaseapp.com"
@@ -89,14 +90,12 @@ Project is created with:
 - React Syntax Highlighter: 15.4.3
 
 ## Future improvements
-
-- add description on snippets datas (with Rte)
 - add flash card interview questions section
 - add favourites articles section with content description
 - add admin section to manage categories list
 
 ## Logs
-
-- 15-03-2021 => added .env file with firebase configuration datas
+- 14-04-2021 -> added local storage to persist datas between refresh page
+- 15-03-2021 -> added .env file with firebase configuration datas
 - 03-03-2021 -> added search engine on homepage
 - 26-02-2021 -> added descriptions (with react-rte) on snippets contents
