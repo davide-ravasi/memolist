@@ -7,7 +7,6 @@ import FilterElements from "../outils/filterElements";
 import ElementDetails from "./ElementDetails";
 import SearchEngine from "./SearchEngine";
 
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ElementsList = ({ onRemove, listItems, searchTerm }) => {
@@ -63,7 +62,7 @@ const ElementsList = ({ onRemove, listItems, searchTerm }) => {
             className={stylesBtnAdd}
             title="Add a new snippet"
           >
-            <FontAwesomeIcon icon={faPlus} />
+            <FontAwesomeIcon icon={['fa','plus']} />
           </Link>
         )}
       </div>
