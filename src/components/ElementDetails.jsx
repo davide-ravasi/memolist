@@ -78,7 +78,7 @@ const ElementDetails = ({
           onClick={(e) => copyToClipboard(e)}
           className={`${roundbtnStyles} absolute bg-gray-400 top-1 right-2 hover:bg-blue-500`}
         >
-          <FontAwesomeIcon icon={['fa','copy']} />
+          <FontAwesomeIcon icon="copy" />
         </button>
         <form className="absolute opacity-0">
           <textarea ref={codeRef} value={text} />
@@ -111,7 +111,7 @@ const ElementDetails = ({
             favourite ? "selected bg-red-400" : "bg-gray-400"
           } top-3 right-9 hover:bg-red-600`}
         >
-          <FontAwesomeIcon icon={['fa','heart']} />
+          <FontAwesomeIcon icon="heart" />
         </button>
       )}
 
@@ -123,7 +123,7 @@ const ElementDetails = ({
           title="Visit the source for this snippet"
           className={`${roundbtnStyles} top-3 right-2 bg-gray-400 hover:bg-gray-700`}
         >
-          <FontAwesomeIcon icon={['fa','link']} />
+          <FontAwesomeIcon icon="link" />
         </a>
       )}
 
@@ -134,14 +134,14 @@ const ElementDetails = ({
             title="Edit this snippet"
             className={`${roundbtnStyles} bottom-3 right-9 bg-gray-400 hover:bg-green-700`}
           >
-            <FontAwesomeIcon icon={['fa','pen']} />
+            <FontAwesomeIcon icon="pen" />
           </Link>
           <button
             title="Remove this snippet"
             className={`${roundbtnStyles} bottom-3 right-2 bg-red-400 hover:bg-red-700 cursor-pointer`}
             onClick={() => onRemove(itemDet)}
           >
-            <FontAwesomeIcon icon={['fa','times']} />
+            <FontAwesomeIcon icon="times" />
           </button>
         </>
       )}

@@ -62,7 +62,7 @@ const ElementsList = ({ onRemove, listItems, searchTerm }) => {
             className={stylesBtnAdd}
             title="Add a new snippet"
           >
-            <FontAwesomeIcon icon={['fa','plus']} />
+            <FontAwesomeIcon icon="plus" />
           </Link>
         )}
       </div>
