@@ -105,7 +105,7 @@ const Header = ({ signIn, signOut }) => {
               <span className="relative px-6 py-1 text-white font-medium text-base text-indigo-300">
                 {currentUser.photoUrl ? (
                   <>
-                    <FontAwesomeIcon className="mr-2" icon={["fa", "user"]} />
+                    <FontAwesomeIcon className="mr-2" icon="user" />
                     {currentUser.name}
                   </>
                 ) : (

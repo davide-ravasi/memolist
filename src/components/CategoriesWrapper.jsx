@@ -35,7 +35,7 @@ const CategoriesWrapper = () => {
             bgColor={"bg-red-500 hover:bg-red-700"}
             title="Remove filter"
           >
-            <FontAwesomeIcon icon={["fa", "times"]} />
+            <FontAwesomeIcon icon="times" />
           </ButtonIcon>
         </div>
       )}
