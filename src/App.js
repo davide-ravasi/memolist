@@ -17,6 +17,7 @@ import Header from "./components/Header";
 import ElementDetails from "./components/ElementDetails";
 import HomePage from "./pages/HomePage";
 import Wishlist from "./pages/Wishlist";
+import Categories from "./pages/Categories";
 import ElementAdd from "./components/ElementAdd";
 import ElementEdit from "./components/ElementEdit";
 import Login from "./components/Login";
@@ -84,6 +85,7 @@ const App = (props) => {
       <Switch>
         <Route path="/" exact component={HomePage} />
         <Route path="/wishlist" exact component={Wishlist} />
+        <Route path="/categories" exact component={Categories} />
         <Route path="/element/add" exact component={ElementAdd} />
         <Route path="/element/edit/:id" exact component={ElementEdit} />
         <Route path="/element/:id" exact component={ElementDetails} />
