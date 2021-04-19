@@ -95,6 +95,7 @@ Project is created with:
 - add admin section to manage categories list
 
 ## Logs
+- 16-04-2021 -> added fontawesome external library
 - 14-04-2021 -> added local storage to persist datas between refresh page
 - 15-03-2021 -> added .env file with firebase configuration datas
 - 03-03-2021 -> added search engine on homepage
