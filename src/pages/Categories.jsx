@@ -1,8 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EdiText from "react-editext";
 
 const Categories = () => {
   const { listCategories } = useSelector((state) => state.categories);
+
+  const roundbtnStyles =
+    "flex justify-center items-center text-white text-sm rounded-full h-6 w-6 transition duration-500 ease-in-out bg-gray-400 hover:bg-green-700";
+
+  const onSave = (val) => {
+    console.log("Edited Value -> ", val);
+  };
 
   return (
     <div className="max-w-screen-lg mx-auto">
@@ -12,7 +21,19 @@ const Categories = () => {
           listCategories.map((cat) => {
             return (
               <div className="bg-white rounded-md p-3 shadow-xl relative">
-                {cat.name}
+                <EdiText
+                  type="text"
+                  viewProps={{
+                    className: "block w-full",
+                  }}
+                  submitOnEnter
+                  cancelOnEscape
+                  editButtonContent={<FontAwesomeIcon icon="pen" />}
+                  editButtonClassName={roundbtnStyles}
+                  value={cat.name}
+                  onSave={onSave}
+                  editOnViewClick={true}
+                />
               </div>
             );
           })}
