@@ -78,11 +78,13 @@ const Header = ({ signIn, signOut }) => {
                 My Wishlist
               </NavLink>
             </li>
-            {/* <li class="mr-3 my-2 md:my-0">
-              <a href="#" className={menuItemsCss}>
-                Categories
-              </a>
-            </li> */}
+            {currentUser && (
+              <li class="mr-3 my-2 md:my-0">
+                <NavLink to="/categories" className={menuItemsCss}>
+                  Categories
+                </NavLink>
+              </li>
+            )}
             <li className="mr-3 my-2 md:my-0">
               <NavLink to="/connection" className={menuItemsCss}>
                 Admin
