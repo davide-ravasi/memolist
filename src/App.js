@@ -10,8 +10,7 @@ import "./outils/fontAwesome";
 
 import { fetchCategories } from "./redux/categories/categories.actions";
 import { setCurrentUser } from "./redux/user/user.actions";
-import { cleanFeedbackMsg } from "./redux/list/list.actions";
-import { cleanErrorMsg } from "./redux/system/system.actions";
+import { cleanErrorMsg, cleanFeedbackMsg } from "./redux/system/system.actions";
 
 import Header from "./components/Header";
 import ElementDetails from "./components/ElementDetails";
@@ -35,10 +34,8 @@ const signOut = (e) => {
 };
 
 const App = (props) => {
-  const selectList = (state) => state.list;
-  const { feedbackMsg } = useSelector(selectList);
   const systMsg = (state) => state.system;
-  const { error } = useSelector(systMsg);
+  const { error, feedBackMessage } = useSelector(systMsg);
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -65,7 +62,8 @@ const App = (props) => {
   }, [dispatch, location]);
 
   useEffect(() => {
-    if (feedbackMsg) {
+    console.log(feedBackMessage);
+    if (feedBackMessage) {
       setTimeout(() => {
         dispatch(cleanFeedbackMsg());
         history.push("/");
@@ -77,7 +75,7 @@ const App = (props) => {
         history.push("/");
       }, 4000);
     }
-  }, [feedbackMsg, error, dispatch, history]);
+  }, [feedBackMessage, error, dispatch, history]);
 
   return (
     <div>
@@ -92,7 +90,7 @@ const App = (props) => {
         <Route path="/connection" exact component={Login} />
       </Switch>
       <Modal>
-        <FeedbackModal feedbackMsg={feedbackMsg} error={error} />
+        <FeedbackModal feedbackMsg={feedBackMessage} error={error} />
       </Modal>
     </div>
   );

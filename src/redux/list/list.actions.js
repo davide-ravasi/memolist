@@ -4,10 +4,9 @@ import {
   ADD_ELEMENT,
   EDIT_ELEMENT,
   REMOVE_ELEMENT,
-  CLEAN_FEEDBACK_MSG,
   UPDATE_SEARCH_TERM,
 } from "./list.types";
-import { ERROR_MESSAGE } from "../system/system.types";
+import { ERROR_MESSAGE, FEEDBACK_MESSAGE } from "../system/system.types";
 import { db } from "../../firebase";
 
 export const fetchList = () =>
@@ -52,6 +51,10 @@ export const addElement = (el, description, name) => async (dispatch) => {
       });
 
     dispatch({ type: ADD_ELEMENT, payload: el });
+    dispatch({
+      type: FEEDBACK_MESSAGE,
+      payload: `The element with title [${el.name}] has been added`,
+    });
   } catch (err) {
     dispatch({ type: ERROR_MESSAGE, payload: { ...err } });
   }
@@ -64,6 +67,10 @@ export const editElement = (el, description) => async (dispatch) => {
       .doc(el.id)
       .set({ ...el, description: description });
     dispatch({ type: EDIT_ELEMENT, payload: el });
+    dispatch({
+      type: FEEDBACK_MESSAGE,
+      payload: `The element with title [${el.name}] has been edited`,
+    });
   } catch (err) {
     dispatch({ type: ERROR_MESSAGE, payload: { ...err } });
   }
@@ -91,12 +98,15 @@ export const removeElement = (el) => async (dispatch) => {
       .update({
         count: firebase.firestore.FieldValue.increment(-1),
       });
+
+    dispatch({
+      type: FEEDBACK_MESSAGE,
+      payload: `The element with title [${el.name}] has been removed`,
+    });
   } catch (err) {
     dispatch({ type: ERROR_MESSAGE, payload: { ...err } });
   }
 };
-
-export const cleanFeedbackMsg = () => ({ type: CLEAN_FEEDBACK_MSG });
 
 export const updateSearchterm = (searchTerm) => ({
   type: UPDATE_SEARCH_TERM,
