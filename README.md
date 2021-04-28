@@ -88,13 +88,17 @@ Project is created with:
 - Html React Parser: 1.2.4
 - React Rte: 0.16.3
 - React Syntax Highlighter: 15.4.3
+- React Editext: 3.18.0,
 
 ## Future improvements
+
 - add flash card interview questions section
 - add favourites articles section with content description
 - add admin section to manage categories list
 
 ## Logs
+
+- 28-04-2021 -> added new categories page on admin section
 - 16-04-2021 -> added fontawesome external library
 - 14-04-2021 -> added local storage to persist datas between refresh page
 - 15-03-2021 -> added .env file with firebase configuration datas
