@@ -2,6 +2,8 @@ import React from "react";
 import { Formik, Field, Form } from "formik";
 import { useDispatch } from "react-redux";
 
+import { addCategory } from "../redux/categories/categories.actions";
+
 const resetValues = {
   name: "",
 };
@@ -17,7 +19,7 @@ const CategoryForm = () => {
   const requiredMsg = "This field is required";
 
   // Synchronous validation
-  const validate = (values, props) => {
+  const validate = (values) => {
     const errors = {};
 
     if (!values.name) {
@@ -33,7 +35,7 @@ const CategoryForm = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values) => {
-        dispatch();
+        dispatch(addCategory(values.name));
       }}
       validate={validate}
     >

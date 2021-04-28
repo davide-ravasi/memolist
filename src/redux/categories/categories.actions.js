@@ -1,7 +1,4 @@
-import {
-  FETCH_CATEGORIES,
-  SET_ACTIVE_CATEGORY,
-} from "./categories.types";
+import { FETCH_CATEGORIES, SET_ACTIVE_CATEGORY } from "./categories.types";
 import { ERROR_MESSAGE, FEEDBACK_MESSAGE } from "../system/system.types";
 import { db } from "../../firebase";
 
@@ -33,9 +30,29 @@ export const modifyCategory = (idCat, newName) => async (dispatch) => {
       name: newName,
     });
 
-    dispatch({ type: FEEDBACK_MESSAGE, payload: `the category name with id ${idCat} is now ${newName}` });
+    dispatch({
+      type: FEEDBACK_MESSAGE,
+      payload: `the category name with id ${idCat} is now ${newName}`,
+    });
   } catch (err) {
     console.log(err);
+    dispatch({ type: ERROR_MESSAGE, payload: err });
+  }
+};
+
+export const addCategory = (name) => async (dispatch) => {
+  try {
+    await db.collection("categories").add({
+      name: name,
+      count: 0,
+      created_at: new Date(),
+    });
+
+    dispatch({
+      type: FEEDBACK_MESSAGE,
+      payload: `the new category ${name} has been added :) `,
+    });
+  } catch (err) {
     dispatch({ type: ERROR_MESSAGE, payload: err });
   }
 };
