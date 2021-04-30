@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EdiText from "react-editext";
 
-import { modifyCategory } from "../redux/categories/categories.actions";
+import {
+  modifyCategory,
+  removeCategory,
+} from "../redux/categories/categories.actions";
 
 import CategoryForm from "../components/CategoryAdd";
 
@@ -27,6 +30,10 @@ const Categories = () => {
 
   const onSave = (idCat, newName) => {
     dispatch(modifyCategory(idCat, newName));
+  };
+
+  const onRemove = (idCat, name) => {
+    dispatch(removeCategory(idCat, name));
   };
 
   const onClick = () => {
@@ -53,7 +60,7 @@ const Categories = () => {
         {listCategories &&
           listCategories.map((cat) => {
             return (
-              <div className="bg-white rounded-md p-3 shadow-xl relative">
+              <div className="bg-white rounded-md p-3 shadow-xl relative pr-10">
                 <EdiText
                   type="text"
                   viewProps={{
@@ -71,6 +78,13 @@ const Categories = () => {
                   onSave={(newName) => onSave(cat.id, newName)}
                   editOnViewClick={true}
                 />
+                <button
+                  title="Remove this category"
+                  className={`${roundbtnStyles} absolute top-3 right-2 bg-red-400 hover:bg-red-700 cursor-pointer`}
+                  onClick={() => onRemove(cat.id, cat.name)}
+                >
+                  <FontAwesomeIcon icon="times" />
+                </button>
               </div>
             );
           })}

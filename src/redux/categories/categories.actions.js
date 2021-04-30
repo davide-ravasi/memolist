@@ -56,3 +56,15 @@ export const addCategory = (name) => async (dispatch) => {
     dispatch({ type: ERROR_MESSAGE, payload: err });
   }
 };
+
+export const removeCategory = (idCat, name) => async (dispatch) => {
+  try {
+    await db.collection("categories").doc(idCat).delete();
+    dispatch({
+      type: FEEDBACK_MESSAGE,
+      payload: `the category ${name} was deleted successfully :) `,
+    });
+  } catch (err) {
+    dispatch({ type: ERROR_MESSAGE, payload: err });
+  }
+};
