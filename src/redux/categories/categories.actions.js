@@ -1,6 +1,7 @@
 import { FETCH_CATEGORIES, SET_ACTIVE_CATEGORY } from "./categories.types";
 import { ERROR_MESSAGE, FEEDBACK_MESSAGE } from "../system/system.types";
 import { db } from "../../firebase";
+import firebase from "firebase";
 
 export const fetchCategories = () => async (dispatch) => {
   try {
@@ -60,6 +61,31 @@ export const addCategory = (name) => async (dispatch) => {
 export const removeCategory = (idCat, name) => async (dispatch) => {
   try {
     await db.collection("categories").doc(idCat).delete();
+    const catCollection = await db
+      .collection("notes")
+      .where("category", "==", name)
+      .get();
+
+    console.log(catCollection);
+
+    catCollection.forEach((doc) => {
+      console.log(doc.data());
+      doc.ref.update({
+        category: "misc",
+      });
+    });
+
+    const catSnapshot = await db
+      .collection("categories")
+      .where("name", "==", "misc")
+      .get();
+
+    catSnapshot.forEach((doc) => {
+      doc.ref.update({
+        count: firebase.firestore.FieldValue.increment(1)
+      });
+    });
+
     dispatch({
       type: FEEDBACK_MESSAGE,
       payload: `the category ${name} was deleted successfully :) `,
