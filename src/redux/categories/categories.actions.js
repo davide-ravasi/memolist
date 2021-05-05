@@ -25,10 +25,22 @@ export const setActiveCategory = (cat) => {
   return { type: SET_ACTIVE_CATEGORY, payload: cat };
 };
 
-export const modifyCategory = (idCat, newName) => async (dispatch) => {
+export const modifyCategory = (idCat, oldName, newName) => async (dispatch) => {
   try {
     await db.collection("categories").doc(idCat).update({
       name: newName,
+    });
+
+    // update items that have category removed
+    const catCollection = await db
+      .collection("notes")
+      .where("category", "==", oldName)
+      .get();
+
+    catCollection.forEach((doc) => {
+      doc.ref.update({
+        category: newName,
+      });
     });
 
     dispatch({
@@ -61,20 +73,20 @@ export const addCategory = (name) => async (dispatch) => {
 export const removeCategory = (idCat, name) => async (dispatch) => {
   try {
     await db.collection("categories").doc(idCat).delete();
+
+    // update items that have category removed
     const catCollection = await db
       .collection("notes")
       .where("category", "==", name)
       .get();
 
-    console.log(catCollection);
-
     catCollection.forEach((doc) => {
-      console.log(doc.data());
       doc.ref.update({
         category: "misc",
       });
     });
 
+    // update counter misc cat
     const catSnapshot = await db
       .collection("categories")
       .where("name", "==", "misc")
@@ -82,7 +94,7 @@ export const removeCategory = (idCat, name) => async (dispatch) => {
 
     catSnapshot.forEach((doc) => {
       doc.ref.update({
-        count: firebase.firestore.FieldValue.increment(1)
+        count: firebase.firestore.FieldValue.increment(1),
       });
     });
 

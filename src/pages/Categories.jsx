@@ -28,8 +28,8 @@ const Categories = () => {
 
   const saveBtnStyles = `${roundbtnStyles} bg-green-400 hover:bg-green-700`;
 
-  const onSave = (idCat, newName) => {
-    dispatch(modifyCategory(idCat, newName));
+  const onSave = (idCat, oldName, newName) => {
+    dispatch(modifyCategory(idCat, oldName, newName));
   };
 
   const onRemove = (idCat, name) => {
@@ -75,7 +75,7 @@ const Categories = () => {
                   editButtonContent={<FontAwesomeIcon icon="pen" />}
                   editButtonClassName={editBtnStyles}
                   value={cat.name}
-                  onSave={(newName) => onSave(cat.id, newName)}
+                  onSave={(newName) => onSave(cat.id, cat.name, newName)}
                   editOnViewClick={true}
                 />
                 <button
