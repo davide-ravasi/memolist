@@ -48,7 +48,7 @@
   "start_url": "/",
   "background_color": "#eef1f9",
   "display": "standalone",
-  "scope": "/",
+  "scope": "https://memolist-code-snippets.herokuapp.com/",
   "theme_color": "#1f2937",
   "description": "Collection of useful snippets and resources"
 }
