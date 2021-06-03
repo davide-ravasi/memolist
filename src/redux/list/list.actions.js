@@ -62,10 +62,47 @@ export const addElement = (el, description, name) => async (dispatch) => {
 
 export const editElement = (el, description) => async (dispatch) => {
   try {
-    const editEl = await db
+    let categoryUpdated = false;
+
+    const editEl = await db.collection("notes").doc(el.id).get();
+    const editData = await editEl.data();
+
+    if (editData.category !== el.category) categoryUpdated = true;
+
+    await db
       .collection("notes")
       .doc(el.id)
       .set({ ...el, description: description });
+
+    if (categoryUpdated) {
+
+      const catToIncrement = await db
+        .collection("categories")
+        .where("name", "==", el.category)
+        .limit(1)
+        .get();
+
+      await db
+        .collection("categories")
+        .doc(catToIncrement.docs[0].id)
+        .update({
+          count: firebase.firestore.FieldValue.increment(1),
+        });
+
+      const catToDecrement = await db
+        .collection("categories")
+        .where("name", "==", editData.category)
+        .limit(1)
+        .get();
+
+      await db
+        .collection("categories")
+        .doc(catToDecrement.docs[0].id)
+        .update({
+          count: firebase.firestore.FieldValue.increment(-1),
+        });
+    }
+
     dispatch({ type: EDIT_ELEMENT, payload: el });
     dispatch({
       type: FEEDBACK_MESSAGE,
