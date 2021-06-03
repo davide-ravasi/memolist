@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 
-import { useDispatch } from 'react-redux';
-import { fetchList } from '../redux/list/list.actions';
+import { useDispatch } from "react-redux";
+import { fetchList } from "../redux/list/list.actions";
 
 import CategoriesWrapper from "../components/CategoriesWrapper";
-import ElementsWrapper from '../components/ElementsWrapper';
+import ElementsWrapper from "../components/ElementsWrapper";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     dispatch(fetchList());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="max-w-screen-lg mx-auto">

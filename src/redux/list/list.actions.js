@@ -25,7 +25,7 @@ export const fetchList = () =>
 
 export const addElement = (el, description, name) => async (dispatch) => {
   try {
-    const addEl = await db.collection("notes").add({
+    await db.collection("notes").add({
       ...el,
       description: description,
       userName: name,
@@ -62,7 +62,7 @@ export const addElement = (el, description, name) => async (dispatch) => {
 
 export const editElement = (el, description) => async (dispatch) => {
   try {
-    const editEl = await db
+    await db
       .collection("notes")
       .doc(el.id)
       .set({ ...el, description: description });
@@ -78,7 +78,7 @@ export const editElement = (el, description) => async (dispatch) => {
 
 export const removeElement = (el) => async (dispatch) => {
   try {
-    const removeEl = await db.collection("notes").doc(el.id).delete();
+    await db.collection("notes").doc(el.id).delete();
     dispatch({ type: REMOVE_ELEMENT, payload: el });
 
     const catSnapshot = await db

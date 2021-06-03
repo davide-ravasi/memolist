@@ -12,7 +12,7 @@ const HomePage = () => {
 
   useEffect(() => {
     dispatch(fetchList());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="max-w-screen-lg mx-auto">

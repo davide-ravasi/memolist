@@ -33,7 +33,7 @@ const ElementForm = ({ defaultValues, action, userName }) => {
 
     useEffect(() => {
         dispatch(fetchCategories());
-    }, []);
+    }, [dispatch]);
 
     // Synchronous validation
     const validate = (values, props) => {
