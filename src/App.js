@@ -59,7 +59,7 @@ const App = (props) => {
     });
 
     dispatch(fetchCategories());
-  }, [dispatch, location]);
+  }, [dispatch, location, history]);
 
   useEffect(() => {
     console.log(feedBackMessage);

@@ -97,9 +97,9 @@ const Header = ({ signIn, signOut }) => {
           {!currentUser && (
             <div className="min-h-full flex items-center justify-between">
               <span className={menuItemsCss}>Not connected</span>
-              <a href="#" className={menuItemsCss} onClick={signIn}>
+              <button type="button" className={menuItemsCss} onClick={signIn}>
                 Google Login
-              </a>
+              </button>
             </div>
           )}
           {currentUser && (
@@ -116,7 +116,7 @@ const Header = ({ signIn, signOut }) => {
                       <img
                         class="rounded-full border border-gray-100 shadow-sm -mt-1"
                         src={currentUser.photo}
-                        alt="user image"
+                        alt="user thumbnail"
                       />
                       <span class="absolute -top-1 -right-1 h-3 w-3 my-1 border-2 border-white rounded-full bg-green-400 z-2"></span>
                     </span>
@@ -126,9 +126,9 @@ const Header = ({ signIn, signOut }) => {
                   </>
                 )}
               </span>
-              <a href="#" className={menuItemsCss} onClick={signOut}>
+              <button type="button" className={menuItemsCss} onClick={signOut}>
                 Logout
-              </a>
+              </button>
             </div>
           )}
         </div>
