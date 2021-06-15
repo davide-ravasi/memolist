@@ -90,13 +90,15 @@ export const removeCategory = (idCat, name) => async (dispatch) => {
     const catSnapshot = await db
       .collection("categories")
       .where("name", "==", "misc")
+      .limit(1)
       .get();
 
-    catSnapshot.forEach((doc) => {
-      doc.ref.update({
-        count: firebase.firestore.FieldValue.increment(1),
+    await db
+      .collection("categories")
+      .doc(catSnapshot.docs[0].id)
+      .update({
+        count: firebase.firestore.FieldValue.increment(catCollection.size),
       });
-    });
 
     dispatch({
       type: FEEDBACK_MESSAGE,
