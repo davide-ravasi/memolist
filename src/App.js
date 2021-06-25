@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth, signInGoogle, manageUserData } from "./firebase";
@@ -13,15 +13,18 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import { cleanErrorMsg, cleanFeedbackMsg } from "./redux/system/system.actions";
 
 import Header from "./components/Header";
-import ElementDetails from "./components/ElementDetails";
-import HomePage from "./pages/HomePage";
-import Wishlist from "./pages/Wishlist";
-import Categories from "./pages/Categories";
-import ElementAdd from "./components/ElementAdd";
-import ElementEdit from "./components/ElementEdit";
-import Login from "./components/Login";
 import Modal from "./components/ModalPortal";
 import FeedbackModal from "./components/FeedbackModal";
+
+
+const ElementDetails = React.lazy(() => import("./components/ElementDetails"));
+const HomePage = React.lazy(() => import("./pages/HomePage"));
+const Wishlist = React.lazy(() => import("./pages/Wishlist"));
+const Categories = React.lazy(() => import("./pages/Categories"));
+const ElementAdd = React.lazy(() => import("./components/ElementAdd"));
+const ElementEdit = React.lazy(() => import("./components/ElementEdit"));
+const Login = React.lazy(() => import("./components/Login"));
+
 
 const signIn = (e) => {
   e.preventDefault();
@@ -80,15 +83,17 @@ const App = (props) => {
   return (
     <div>
       <Header signIn={signIn} signOut={signOut} />
-      <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/wishlist" exact component={Wishlist} />
-        <Route path="/categories" exact component={Categories} />
-        <Route path="/element/add" exact component={ElementAdd} />
-        <Route path="/element/edit/:id" exact component={ElementEdit} />
-        <Route path="/element/:id" exact component={ElementDetails} />
-        <Route path="/connection" exact component={Login} />
-      </Switch>
+      <Suspense fallback={<div>---loading</div>} >
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/wishlist" exact component={Wishlist} />
+          <Route path="/categories" exact component={Categories} />
+          <Route path="/element/add" exact component={ElementAdd} />
+          <Route path="/element/edit/:id" exact component={ElementEdit} />
+          <Route path="/element/:id" exact component={ElementDetails} />
+          <Route path="/connection" exact component={Login} />
+        </Switch>
+      </Suspense>
       <Modal>
         <FeedbackModal feedbackMsg={feedBackMessage} error={error} />
       </Modal>
