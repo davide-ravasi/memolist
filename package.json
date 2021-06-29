@@ -37,7 +37,7 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
-    "build:tailwind": "tailwindcss build src/tailwind.css -o src/tailwind.output.css --minify",
+    "build:tailwind": "NODE_ENV=production tailwindcss -i src/tailwind.css -o src/tailwind.output.css --minify",
     "prestart": "npm run build:tailwind",
     "prebuild": "npm run build:tailwind",
     "start": "react-scripts start",
