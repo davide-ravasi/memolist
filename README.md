@@ -97,7 +97,7 @@ Project is created with:
 - add admin section to manage categories list
 
 ## Logs
-
+- 10-07-2021 -> added service worker and add to home screen functionality
 - 28-04-2021 -> added new categories page on admin section
 - 16-04-2021 -> added fontawesome external library
 - 14-04-2021 -> added local storage to persist datas between refresh page
