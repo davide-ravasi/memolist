@@ -91,10 +91,8 @@ Project is created with:
 - React Editext: 3.18.0,
 
 ## Future improvements
-
+- add random sort single flashcard
 - add flash card interview questions section
-- add favourites articles section with content description
-- add admin section to manage categories list
 
 ## Logs
 - 10-07-2021 -> added service worker and add to home screen functionality
