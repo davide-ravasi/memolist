@@ -2,6 +2,7 @@ import React, { Suspense, useEffect } from "react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth, signInGoogle, manageUserData } from "./firebase";
+import ReactGA from 'react-ga';
 
 /// https://daveceddia.com/tailwind-create-react-app
 import "./tailwind.output.css";
@@ -15,6 +16,11 @@ import { cleanErrorMsg, cleanFeedbackMsg } from "./redux/system/system.actions";
 import Header from "./components/Header";
 import Modal from "./components/ModalPortal";
 import FeedbackModal from "./components/FeedbackModal";
+import RouteChangeTracker from './components/RouteChangeTracker';
+
+// https://javascript.plainenglish.io/how-to-setup-and-add-google-analytics-to-your-react-app-fd361f47ac7b
+const TRACKING_ID = process.env.REACT_GA_TRACKING_ID; // YOUR_OWN_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
 
 
 const ElementDetails = React.lazy(() => import("./components/ElementDetails"));
@@ -83,6 +89,7 @@ const App = (props) => {
   return (
     <div>
       <Header signIn={signIn} signOut={signOut} />
+      <RouteChangeTracker />
       <Suspense fallback={<div>---loading</div>} >
         <Switch>
           <Route path="/" exact component={HomePage} />
