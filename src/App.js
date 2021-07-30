@@ -16,11 +16,11 @@ import { cleanErrorMsg, cleanFeedbackMsg } from "./redux/system/system.actions";
 import Header from "./components/Header";
 import Modal from "./components/ModalPortal";
 import FeedbackModal from "./components/FeedbackModal";
-import RouteChangeTracker from './components/RouteChangeTracker';
 
 // https://javascript.plainenglish.io/how-to-setup-and-add-google-analytics-to-your-react-app-fd361f47ac7b
-const TRACKING_ID = process.env.REACT_GA_TRACKING_ID; // YOUR_OWN_TRACKING_ID
+const TRACKING_ID = process.env.REACT_GA_TRACKING_ID; //YOUR_OWN_TRACKING_ID
 ReactGA.initialize(TRACKING_ID);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 
 const ElementDetails = React.lazy(() => import("./components/ElementDetails"));
@@ -89,7 +89,6 @@ const App = (props) => {
   return (
     <div>
       <Header signIn={signIn} signOut={signOut} />
-      <RouteChangeTracker />
       <Suspense fallback={<div>---loading</div>} >
         <Switch>
           <Route path="/" exact component={HomePage} />
