@@ -14,6 +14,7 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import { cleanErrorMsg, cleanFeedbackMsg } from "./redux/system/system.actions";
 
 import Header from "./components/Header";
+import RouteChangeTracker from './components/RouteChangeTracker';
 import Modal from "./components/ModalPortal";
 import FeedbackModal from "./components/FeedbackModal";
 
@@ -21,7 +22,6 @@ import FeedbackModal from "./components/FeedbackModal";
 // const TRACKING_ID = process.env.REACT_APP_GA_TRACKING_ID; //YOUR_OWN_TRACKING_ID
 ReactGA.initialize("UA-44845508-2");
 ReactGA.pageview(window.location.pathname + window.location.search);
-
 
 const ElementDetails = React.lazy(() => import("./components/ElementDetails"));
 const HomePage = React.lazy(() => import("./pages/HomePage"));
@@ -89,6 +89,7 @@ const App = (props) => {
   return (
     <div>
       <Header signIn={signIn} signOut={signOut} />
+      <RouteChangeTracker />
       <Suspense fallback={<div>---loading</div>} >
         <Switch>
           <Route path="/" exact component={HomePage} />
