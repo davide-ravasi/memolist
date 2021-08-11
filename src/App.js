@@ -18,8 +18,8 @@ import Modal from "./components/ModalPortal";
 import FeedbackModal from "./components/FeedbackModal";
 
 // https://javascript.plainenglish.io/how-to-setup-and-add-google-analytics-to-your-react-app-fd361f47ac7b
-const TRACKING_ID = process.env.REACT_APP_GA_TRACKING_ID; //YOUR_OWN_TRACKING_ID
-ReactGA.initialize(TRACKING_ID);
+// const TRACKING_ID = process.env.REACT_APP_GA_TRACKING_ID; //YOUR_OWN_TRACKING_ID
+ReactGA.initialize("UA-44845508-2");
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 
