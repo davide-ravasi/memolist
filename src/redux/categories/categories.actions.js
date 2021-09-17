@@ -55,15 +55,25 @@ export const modifyCategory = (idCat, oldName, newName) => async (dispatch) => {
 
 export const addCategory = (name) => async (dispatch) => {
   try {
-    await db.collection("categories").add({
-      name: name,
-      count: 0,
-      created_at: new Date(),
-    });
+    let newPayload;
+    //check if category exists
+    const catExists = await db.collection("categories").where('name', '==', name).get();
+
+    if (catExists.size === 0) {
+      await db.collection("categories").add({
+        name: name,
+        count: 0,
+        created_at: new Date(),
+      });
+
+      newPayload = `the new category ${name} has been added :) `
+    } else {
+      newPayload = `the category ${name} already exists :) `
+    }
 
     dispatch({
       type: FEEDBACK_MESSAGE,
-      payload: `the new category ${name} has been added :) `,
+      payload: newPayload,
     });
   } catch (err) {
     dispatch({ type: ERROR_MESSAGE, payload: err });
