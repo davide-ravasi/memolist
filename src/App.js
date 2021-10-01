@@ -29,6 +29,7 @@ const Wishlist = React.lazy(() => import("./pages/Wishlist"));
 const Categories = React.lazy(() => import("./pages/Categories"));
 const ElementAdd = React.lazy(() => import("./components/ElementAdd"));
 const ElementEdit = React.lazy(() => import("./components/ElementEdit"));
+const FlashCardAdd = React.lazy(() => import("./components/FlashCardAdd"));
 const Login = React.lazy(() => import("./components/Login"));
 
 
@@ -98,6 +99,7 @@ const App = (props) => {
           <Route path="/element/add" exact component={ElementAdd} />
           <Route path="/element/edit/:id" exact component={ElementEdit} />
           <Route path="/element/:id" exact component={ElementDetails} />
+          <Route path="/flashcard/add" exact component={FlashCardAdd} />
           <Route path="/connection" exact component={Login} />
         </Switch>
       </Suspense>
