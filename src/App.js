@@ -28,6 +28,7 @@ const HomePage = React.lazy(() => import("./pages/HomePage"));
 const Wishlist = React.lazy(() => import("./pages/Wishlist"));
 const Categories = React.lazy(() => import("./pages/Categories"));
 const FlashCards = React.lazy(() => import("./pages/FlashCards"));
+const FlashCardAdd = React.lazy(() => import("./components/FlashCardAdd"));
 const ElementAdd = React.lazy(() => import("./components/ElementAdd"));
 const ElementEdit = React.lazy(() => import("./components/ElementEdit"));
 const Login = React.lazy(() => import("./components/Login"));
