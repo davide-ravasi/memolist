@@ -11,9 +11,6 @@ export const addFlashCard = (el, description) => async (dispatch) => {
       ...el,
       description
     })
-
-
-
   } catch (err) {
     console.log(err);
   }
