@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fetchFlashcard } from '../redux/flashcard/flashcard.actions';
+import { fetchFlashcard, removeFlashCard } from '../redux/flashcard/flashcard.actions';
+import Modal from "../components/ModalPortal";
+import ConfirmModal from "../components/ConfirmModal";
 
 const FlashCards = () => {
   const stylesBtnAdd = `absolute right-0 top-3 flex justify-center items-center text-white 
@@ -17,16 +19,29 @@ const FlashCards = () => {
   const { currentUser } = useSelector(user);
   const { listFlashcards } = useSelector(flashcards)
   const [isAdmin, setIsAdmin] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const [elToRemove, setElToRemove] = useState(null);
 
   useEffect(() => {
     if (currentUser && currentUser.admLvl === true) {
       setIsAdmin(true);
       dispatch(fetchFlashcard());
     }
-  }, [currentUser]);
+  }, [currentUser, dispatch]);
 
-  const onRemove = () => {
+  const onCloseModal = () => {
+    setModalShow(false);
+    setElToRemove(null);
+  }
 
+  const onConfirmModal = () => {
+    setModalShow(false);
+    dispatch(removeFlashCard(elToRemove));
+  };
+
+  const onRemove = (item) => {
+    setModalShow(true);
+    setElToRemove(item);
   }
 
   return (
@@ -50,7 +65,7 @@ const FlashCards = () => {
               <button
                 title="Remove this flashcard"
                 className={`${roundbtnStyles} absolute top-3 right-2 bg-red-400 hover:bg-red-700 cursor-pointer`}
-                onClick={() => onRemove()}
+                onClick={() => onRemove(card)}
               >
                 <FontAwesomeIcon icon="times" />
               </button>
@@ -58,6 +73,14 @@ const FlashCards = () => {
           })}
         </div>
       ) : '......loading'}
+
+      <Modal>
+        <ConfirmModal
+          modalShow={modalShow}
+          closeModal={onCloseModal}
+          confirmModal={onConfirmModal}
+        />
+      </Modal>
     </div>)
 }
 

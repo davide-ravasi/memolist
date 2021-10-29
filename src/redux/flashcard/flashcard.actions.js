@@ -23,15 +23,22 @@ export const addFlashCard = (el, description) => async (dispatch) => {
 
 export const fetchFlashcard = () => async (dispatch) => {
   try {
-    console.log("flashcards");
     const flashcards = await db.collection("flashcards").get();
-    console.log(flashcards.docs);
     const arrFlashcards = await flashcards.docs.map(card => {
-      return card.data();
+      return { cardId: card.id, ...card.data() };
     })
     dispatch({ type: FETCH_FLASHCARDS, payload: arrFlashcards });
   } catch (err) {
-    console.log(err);
-    //dispatch({ type: ERROR_MESSAGE, payload: { ...err } });
+    dispatch({ type: ERROR_MESSAGE, payload: { ...err } });
+  }
+}
+
+export const removeFlashCard = (card) => async (dispatch) => {
+  try {
+    await db.collection("flashcards").doc(card.cardId).delete();
+
+    await dispatch({ type: FEEDBACK_MESSAGE, payload: `The question flashcard "${card.question}" has been removed` });
+  } catch (err) {
+    dispatch({ type: ERROR_MESSAGE, payload: { ...err } });
   }
 }
