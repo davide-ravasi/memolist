@@ -4,11 +4,13 @@ import listReducer from './list/list.reducer';
 import userReducer from './user/user.reducer';
 import systemReducer from './system/system.reducer';
 import wishlistReducer from './wishlist/wishlist.reducer';
+import flashcardReducer from './flashcard/flashcard.reducer';
 
 export default combineReducers({
   list: listReducer,
   user: userReducer,
   categories: categoriesReducer,
   system: systemReducer,
-  wishlist: wishlistReducer
+  wishlist: wishlistReducer,
+  flashcards: flashcardReducer
 });
