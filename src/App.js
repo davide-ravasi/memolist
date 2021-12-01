@@ -17,6 +17,7 @@ import Header from "./components/Header";
 import RouteChangeTracker from './components/RouteChangeTracker';
 import Modal from "./components/ModalPortal";
 import FeedbackModal from "./components/FeedbackModal";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // https://javascript.plainenglish.io/how-to-setup-and-add-google-analytics-to-your-react-app-fd361f47ac7b
 // const TRACKING_ID = process.env.REACT_APP_GA_TRACKING_ID; //YOUR_OWN_TRACKING_ID
@@ -97,11 +98,11 @@ const App = (props) => {
           <Route path="/" exact component={HomePage} />
           <Route path="/wishlist" exact component={Wishlist} />
           <Route path="/categories" exact component={Categories} />
-          <Route path="/element/add" exact component={ElementAdd} />
-          <Route path="/element/edit/:id" exact component={ElementEdit} />
+          <ProtectedRoute path="/element/add" exact component={ElementAdd} />
+          <ProtectedRoute path="/element/edit/:id" exact component={ElementEdit} />
           <Route path="/element/:id" exact component={ElementDetails} />
-          <Route path="/flashcards" exact component={FlashCards} />
-          <Route path="/flashcards/add" exact component={FlashCardAdd} />
+          <ProtectedRoute path="/flashcards" exact component={FlashCards} />
+          <ProtectedRoute path="/flashcards/add" exact component={FlashCardAdd} />
           <Route path="/connection" exact component={Login} />
         </Switch>
       </Suspense>
