@@ -73,22 +73,24 @@ const Header = ({ signIn, signOut }) => {
                 Home
               </NavLink>
             </li>
-            <li class="mr-3 my-2 md:my-0">
-              <NavLink to="/wishlist" className={menuItemsCss}>
-                My Wishlist
-              </NavLink>
-            </li>
-            <li class="mr-3 my-2 md:my-0">
-              <NavLink to="/flashcards" className={menuItemsCss}>
-                FlashCards
-              </NavLink>
-            </li>
             {currentUser && (
-              <li class="mr-3 my-2 md:my-0">
+              <>
+                <li class="mr-3 my-2 md:my-0">
+                  <NavLink to="/wishlist" className={menuItemsCss}>
+                    My Wishlist
+                  </NavLink>
+                </li>
+                <li class="mr-3 my-2 md:my-0">
+                  <NavLink to="/flashcards" className={menuItemsCss}>
+                    FlashCards
+                  </NavLink>
+                </li>
+                <li class="mr-3 my-2 md:my-0">
                 <NavLink to="/categories" className={menuItemsCss}>
                   Categories
                 </NavLink>
               </li>
+              </>
             )}
             <li className="mr-3 my-2 md:my-0">
               <NavLink to="/connection" className={menuItemsCss}>

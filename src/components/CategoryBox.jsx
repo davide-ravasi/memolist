@@ -6,7 +6,7 @@ const CategoryBox = ({ count, name, activeCategory }) => {
   const isActive = name === activeCategory;
   const classBox = `box-${name} ${
     isActive ? "bg-indigo-400" : "bg-gray-400"
-  } w-1/2 mr-2 rounded-full mt-2 md:mt-1 inline-block py-0.5 px-3 text-white cursor-pointer hover:bg-indigo-400 transition duration-500 ease-in-out shadow-xl`;
+  } w-1/2 md:mr-2 rounded-full mt-2 md:mt-1 inline-block py-0.5 px-3 text-white cursor-pointer hover:bg-indigo-400 transition duration-500 ease-in-out shadow-xl`;
   const dispatch = useDispatch();
 
   return (
