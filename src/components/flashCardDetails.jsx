@@ -21,6 +21,7 @@ const FlashCardDetails = ({ description, link1 }) => {
             className="block underline text-gray-700 mt-4 mb-2 text-sm"
             href={link1}
             target="_blank"
+            rel="noreferrer"
           >
             <FontAwesomeIcon icon="link" /> See the documentation
           </a>
