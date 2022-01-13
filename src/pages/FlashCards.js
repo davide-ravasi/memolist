@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fetchFlashcard, removeFlashCard } from '../redux/flashcard/flashcard.actions';
 import Modal from "../components/ModalPortal";
 import ConfirmModal from "../components/ConfirmModal";
+import FlashCardDetails from '../components/flashCardDetails';
 
 const FlashCards = () => {
   const stylesBtnAdd = `absolute right-0 top-3 flex justify-center items-center text-white 
@@ -60,15 +61,16 @@ const FlashCards = () => {
       {(listFlashcards && listFlashcards.length > 0) ? (
         <div className="mt-8 grid md:grid-cols-3 xs:grid-cols-1 gap-4 relative">
           {listFlashcards.map(card => {
-            return <div className="bg-white rounded-md p-3 shadow-xl relative pr-10">
-              <p>{card.question}</p>
-              <button
+            return <div className="bg-white rounded-md p-3 shadow-xl relative">
+              <p className="pr-10">{card.question}</p>
+              { isAdmin && <button
                 title="Remove this flashcard"
                 className={`${roundbtnStyles} absolute top-3 right-2 bg-red-400 hover:bg-red-700 cursor-pointer`}
                 onClick={() => onRemove(card)}
               >
                 <FontAwesomeIcon icon="times" />
-              </button>
+              </button>}
+              <FlashCardDetails description={card.description} link1={card.link1} />
             </div>
           })}
         </div>
