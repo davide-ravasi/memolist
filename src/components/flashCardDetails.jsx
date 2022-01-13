@@ -5,7 +5,6 @@ const FlashCardDetails = ({ description, link1 }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const expandDetails = (e) => {
-    e.preventDefault();
     setShowDetails(!showDetails);
   };
 
@@ -27,13 +26,12 @@ const FlashCardDetails = ({ description, link1 }) => {
           </a>
         </div>
       )}
-      <a
-        href="#"
+      <button
         onClick={expandDetails}
         className="block mt-4 underline decoration-1 text-indigo-500 text-sm"
       >
         {!showDetails ? `Expand details ${">"}` : `${"<"} Collapse details`}
-      </a>
+      </button>
     </>
   );
 };
