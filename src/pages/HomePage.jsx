@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div className="max-w-screen-lg mx-auto">
       <h1 className="mt-8 mx-4 font-md text-2xl">Code snippets library</h1>
-      <div className="mx-4 mt-1 mb-0 p-2 pl-0 relative">
+      <div className="mx-4 mt-1 mb-0 p-2 pl-0 relative flex">
         <CategoriesWrapper />
       </div>
       <ElementsWrapper />

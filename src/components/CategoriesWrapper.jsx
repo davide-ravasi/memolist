@@ -15,7 +15,7 @@ const CategoriesWrapper = () => {
   const { listCategories } = useSelector((state) => state.categories);
 
   const removeFilter = () => {
-    dispatch(setActiveCategory(""));
+    if (activeCategory) dispatch(setActiveCategory(""));
   };
 
   return (
@@ -28,17 +28,18 @@ const CategoriesWrapper = () => {
       ) : (
         <Spinner bgColor={"text-black"} text={"loading categories"} />
       )}
-      {activeCategory && (
-        <div className="float-left md:ml-0 mt-2 md:mt-0">
-          <ButtonIcon
-            clickEvent={removeFilter}
-            bgColor={"bg-red-500 hover:bg-red-700"}
-            title="Remove filter"
-          >
-            <FontAwesomeIcon icon="times" />
-          </ButtonIcon>
-        </div>
-      )}
+
+      <div className="float-left md:ml-0 mt-2 md:mt-1">
+        <ButtonIcon
+          clickEvent={removeFilter}
+          bgColor={
+            activeCategory ? "bg-red-500 hover:bg-red-700" : "bg-gray-300"
+          }
+          title="Remove filter"
+        >
+          <FontAwesomeIcon icon="times" />
+        </ButtonIcon>
+      </div>
     </>
   );
 };

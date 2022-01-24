@@ -4,7 +4,7 @@ import CategoryBox from "./CategoryBox";
 
 const CategoriesList = ({ activeCategory, listCategories }) => {
   return (
-    <div className="md:flex">
+    <div className="md:flex md:flex-auto">
       {listCategories
         .filter((cat) => cat.count > 0)
         .map((cat) => (

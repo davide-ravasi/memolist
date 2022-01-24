@@ -26,8 +26,9 @@ const FlashCards = () => {
   useEffect(() => {
     if (currentUser && currentUser.admLvl === true) {
       setIsAdmin(true);
-      dispatch(fetchFlashcard());
     }
+
+    dispatch(fetchFlashcard());
   }, [currentUser, dispatch]);
 
   const onCloseModal = () => {
@@ -63,7 +64,7 @@ const FlashCards = () => {
           {listFlashcards.map(card => {
             return <div className="bg-white rounded-md p-3 shadow-xl relative">
               <p className="pr-10">{card.question}</p>
-              { isAdmin && <button
+              {isAdmin && <button
                 title="Remove this flashcard"
                 className={`${roundbtnStyles} absolute top-3 right-2 bg-red-400 hover:bg-red-700 cursor-pointer`}
                 onClick={() => onRemove(card)}
